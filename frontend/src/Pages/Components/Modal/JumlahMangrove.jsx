@@ -28,7 +28,7 @@ export const JumlahMangrove = () => {
     <>
       <input type="checkbox" id="jumlah-mangrove" className="modal-toggle" />
       <div className="modal">
-        <div className="pb-10 w-10/12">
+        <div className="modal-box w-11/12 pt-14 max-w-5xl bg-opacity-70 backdrop-filter backdrop-brightness-100 bg-gray-900 text-white">
           <CanvasJSChart
             options={options}
             /* onRef = {ref => this.chart = ref} */

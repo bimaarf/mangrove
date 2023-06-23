@@ -17,18 +17,18 @@ export const Home = () => {
   return (
     <>
       <Headers />
-      <div className="carousel w-full">
+      <div className="carousel w-full pt-24 md:pt-0 bg-black">
         <div id="slide1" className="carousel-item relative w-full">
           <img src={ImagesBg} className="w-full" />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a
               href="#slide4"
-              className="btn btn-circle bg-transparent text-white p-4 hover:bg-opacity-10">
+              className="border py-4 px-5 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
               ❮
             </a>
             <a
               href="#slide2"
-              className="btn btn-circle bg-transparent text-white p-4 hover:bg-opacity-10">
+              className="border py-4 px-5 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
               ❯
             </a>
           </div>
@@ -38,12 +38,12 @@ export const Home = () => {
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a
               href="#slide1"
-              className="btn btn-circle bg-transparent text-white p-4 hover:bg-opacity-10">
+              className="border py-4 px-5 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
               ❮
             </a>
             <a
               href="#slide3"
-              className="btn btn-circle bg-transparent text-white p-4 hover:bg-opacity-10">
+              className="border py-4 px-5 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
               ❯
             </a>
           </div>
@@ -53,12 +53,12 @@ export const Home = () => {
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a
               href="#slide2"
-              className="btn btn-circle bg-transparent text-white p-4 hover:bg-opacity-10">
+              className="border py-4 px-5 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
               ❮
             </a>
             <a
               href="#slide4"
-              className="btn btn-circle bg-transparent text-white p-4 hover:bg-opacity-10">
+              className="border py-4 px-5 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
               ❯
             </a>
           </div>
@@ -68,12 +68,12 @@ export const Home = () => {
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a
               href="#slide3"
-              className="btn btn-circle bg-transparent text-white p-4 hover:bg-opacity-10">
+              className="border py-4 px-5 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
               ❮
             </a>
             <a
               href="#slide1"
-              className="btn btn-circle bg-transparent text-white p-4 hover:bg-opacity-10">
+              className="border py-4 px-5 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
               ❯
             </a>
           </div>

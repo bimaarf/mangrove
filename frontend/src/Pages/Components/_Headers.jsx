@@ -11,7 +11,7 @@ export const Headers = () => {
       <MapLocation />
       <JumlahMangrove />
       <Donatur />
-      <div className="md:flex  justify-between items-center bg-black bg-opacity-40 backdrop-filter backdrop-blur-lg border-b fixed w-full z-50 md:px-10 px-2 py-2">
+      <div className="lg:flex justify-between items-center bg-black bg-opacity-40 backdrop-filter backdrop-blur-lg border-b fixed w-full z-50 md:px-10 px-2 py-2">
         <div
           onClick={() => navRedirect("/")}
           className="flex justify-start items-center gap-3 cursor-pointer">
@@ -23,7 +23,13 @@ export const Headers = () => {
             <p className="text-white">Jam Operasional : 09.00 WIB</p>
           </div>
         </div>
-        <div className="flex md:justify-end justify-start items-center gap-1 md:gap-4 md:mt-0 mt-4 overflow-x-auto">
+        <div className="flex xl:justify-end justify-start items-center gap-1 md:gap-4 md:mt-6 pb-4 lg:pb-0 lg:mt-0 mt-4 overflow-x-auto">
+          <div
+            onClick={() => navRedirect("/")}
+            className="flex text-white cursor-pointer border py-1 px-2 whitespace-nowrap md:px-4 rounded hover:md:px-5 hover:text-gray-300 text-xs md:text-xl duration-200 justify-center items-center gap-1">
+            <i className="fa fa-home"></i>
+            <span>Beranda</span>
+          </div>
           <label
             htmlFor="my_modal_6"
             className="flex text-white cursor-pointer border py-1 px-2 whitespace-nowrap md:px-4 rounded hover:md:px-5 hover:text-gray-300 text-xs md:text-xl duration-200 justify-center items-center gap-1">
@@ -53,6 +59,12 @@ export const Headers = () => {
             className="flex text-white cursor-pointer border py-1 px-2 whitespace-nowrap md:px-4 rounded hover:md:px-5 hover:text-gray-300 text-xs md:text-xl duration-200 justify-center items-center gap-1">
             <i className="fa fa-search"></i>
             <span>Tentang Kami</span>
+          </div>
+          <div
+            onClick={() => navRedirect("/login")}
+            className="flex text-white cursor-pointer border py-1 px-2 whitespace-nowrap md:px-4 rounded hover:md:px-5 hover:text-gray-300 text-xs md:text-xl duration-200 justify-center items-center gap-1">
+            <i className="fa fa-user"></i>
+            <span>Masuk</span>
           </div>
         </div>
       </div>
