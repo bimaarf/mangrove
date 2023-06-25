@@ -1,22 +1,17 @@
 import React from "react";
-import ImageSlide1 from "../Images/mangrove-home.jpg";
 import ImagesBg from "../Images/bg-home.jpg";
-import ImagesSlide1 from "../Images/slide-1.jpg";
-import ImagesSlide2 from "../Images/slide-2.jpg";
 import ImgSlider1 from "../Images/img-slider-1.jpg";
 import ImgSlider2 from "../Images/img-slider-2.jpg";
 import ImgSlider3 from "../Images/img-slider-3.jpg";
-import ImgSlider4 from "../Images/mangrove-home.jpg";
 import ImgSlider5 from "../Images/img-slider-5.jpg";
 import ImgSlider6 from "../Images/img-slider-6.jpg";
 import ImgSlider7 from "../Images/img-slider-7.png";
 import ImgSlider8 from "../Images/img-slider-8.png";
-import { Headers } from "./Components/_Headers";
+import ImgSlider4 from "../Images/mangrove-home.jpg";
 import { Footer } from "./Components/_Footer";
 export const Home = () => {
   return (
     <>
-      <Headers />
       <div className="carousel w-full pt-24 md:pt-0 bg-black">
         <div id="slide1" className="carousel-item relative w-full">
           <img src={ImagesBg} className="w-full" />

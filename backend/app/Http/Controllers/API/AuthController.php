@@ -66,13 +66,7 @@ class AuthController extends Controller
             'email' => 'required|max:191',
             'password' => 'required|max:30|min:5',
         ]);
-        if ($validator->fails()) {
-
-            return response()->json([
-                'status' => 202,
-                'validation_error' => $validator->errors(),
-            ]);
-        } else {
+        try {
             $user = User::where('email', $request->email)->first();
 
             if (!$user || Hash::check($request->email, $user->email)) {
@@ -101,6 +95,11 @@ class AuthController extends Controller
                     'message' => 'Logged In Successfully!',
                 ]);
             }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 202,
+                'validation_error' => $validator->errors(),
+            ]);
         }
     }
     public function logout()

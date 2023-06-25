@@ -1,8 +1,7 @@
 import React from "react";
 
-import ImagesBg from "../Images/bg-home.jpg";
-import { Headers } from "./Components/_Headers";
 import CanvasJSReact from "@canvasjs/react-charts";
+import ImagesBg from "../Images/bg-home.jpg";
 import { Footer } from "./Components/_Footer";
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -30,7 +29,6 @@ export const About = () => {
   };
   return (
     <>
-      <Headers />
       <div
         className="h-96"
         style={{

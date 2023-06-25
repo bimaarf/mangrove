@@ -30,9 +30,8 @@ export const Footer = () => {
         </div>
         <div className="border-t mt-4 p-4 text-gray-100">
           <p className="md:w-1/2">
-            © Copyright 2018 Taman Mangrove Jakarta - All Rights Reserved Images
-            supported By: Yonni Rustandi, Achmad Sofyan, Amri A. Zainun, Moh.
-            Bahrun
+            © Copyright 2023 Taman Mangrove Mempawah - All Rights Reserved
+            Images
           </p>
         </div>
       </div>

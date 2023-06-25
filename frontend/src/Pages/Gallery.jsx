@@ -1,27 +1,23 @@
 import React from "react";
-import { Headers } from "./Components/_Headers";
 import ImagesBg from "../Images/bg-home.jpg";
-import ImagesSlide1 from "../Images/slide-1.jpg";
-import ImagesSlide2 from "../Images/slide-2.jpg";
 import ImgSlider1 from "../Images/img-slider-1.jpg";
+import ImgSlider10 from "../Images/img-slider-10.png";
+import ImgSlider11 from "../Images/img-slider-11.png";
 import ImgSlider2 from "../Images/img-slider-2.jpg";
 import ImgSlider3 from "../Images/img-slider-3.jpg";
-import ImgSlider4 from "../Images/mangrove-home.jpg";
 import ImgSlider5 from "../Images/img-slider-5.jpg";
 import ImgSlider6 from "../Images/img-slider-6.jpg";
 import ImgSlider7 from "../Images/img-slider-7.png";
 import ImgSlider8 from "../Images/img-slider-8.png";
 import ImgSlider9 from "../Images/img-slider-9.png";
-import ImgSlider10 from "../Images/img-slider-10.png";
-import ImgSlider11 from "../Images/img-slider-11.png";
+import ImgSlider4 from "../Images/mangrove-home.jpg";
 import { Footer } from "./Components/_Footer";
 export const Gallery = () => {
   return (
     <>
-      <Headers />
       <div className="" style={{ backgroundImage: `url(${ImagesBg})` }}>
         <div className="mx-auto pt-32">
-          <div className="text-white flex items-center gap-1 font-medium mb-4 ml-3 md:ml-10 text-xl md:text-3xl ">
+          <div className="text-white flex items-center gap-1 font-medium mt-4 md:mt-0 mb-4 ml-3 md:ml-10 text-xl md:text-3xl ">
             <i className="fa fa-image"></i>
             <h1 className="underline underline-offset-8">Gallery</h1>
           </div>
