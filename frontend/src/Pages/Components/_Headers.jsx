@@ -44,7 +44,10 @@ export const Headers = ({ setAuthCheck, authCheck }) => {
       <Donatur />
       <div className="lg:flex justify-between items-center bg-black bg-opacity-40 backdrop-filter backdrop-blur-lg border-b fixed w-full z-50 md:px-10 px-2 py-2">
         <div
-          onClick={() => navRedirect("/")}
+          onClick={() => {
+            navRedirect("/");
+            setDropdown(false);
+          }}
           className="flex justify-start items-center gap-3 cursor-pointer">
           <img src={ImageLogo} alt="" width={50} />
           <div>
@@ -59,7 +62,10 @@ export const Headers = ({ setAuthCheck, authCheck }) => {
             authCheck ? "justify-end" : "justify-start"
           } items-center gap-1 md:gap-4 md:mt-6 pb-4 lg:pb-0 lg:mt-0 mt-4 overflow-x-auto`}>
           <div
-            onClick={() => navRedirect("/")}
+            onClick={() => {
+              navRedirect("/");
+              setDropdown(false);
+            }}
             className="flex text-white cursor-pointer border py-1 px-2 whitespace-nowrap md:px-4 rounded hover:md:px-5 hover:text-gray-300 text-xs md:text-xl duration-200 justify-center items-center gap-1">
             <i className="fa fa-home"></i>
             <span>Beranda</span>
@@ -71,7 +77,10 @@ export const Headers = ({ setAuthCheck, authCheck }) => {
             <span>Lokasi Tanam</span>
           </label>
           <div
-            onClick={() => navRedirect("/gallery")}
+            onClick={() => {
+              navRedirect("/gallery");
+              setDropdown(false);
+            }}
             className="flex text-white cursor-pointer border py-1 px-2 whitespace-nowrap md:px-4 rounded hover:md:px-5 hover:text-gray-300 text-xs md:text-xl duration-200 justify-center items-center gap-1">
             <i className="fa fa-picture-o"></i>
             <span>Gallery</span>
@@ -89,7 +98,10 @@ export const Headers = ({ setAuthCheck, authCheck }) => {
             <span>Mitra</span>
           </label>
           <div
-            onClick={() => navRedirect("/tentang-kami")}
+            onClick={() => {
+              navRedirect("/tentang-kami");
+              setDropdown(false);
+            }}
             className="flex text-white cursor-pointer border py-1 px-2 whitespace-nowrap md:px-4 rounded hover:md:px-5 hover:text-gray-300 text-xs md:text-xl duration-200 justify-center items-center gap-1">
             <i className="fa fa-search"></i>
             <span>Tentang Kami</span>
@@ -107,7 +119,10 @@ export const Headers = ({ setAuthCheck, authCheck }) => {
             </div>
           ) : (
             <div
-              onClick={() => navRedirect("/login")}
+              onClick={() => {
+                navRedirect("/login");
+                setDropdown(false);
+              }}
               className="flex text-white cursor-pointer border py-1 px-2 whitespace-nowrap md:px-4 rounded hover:md:px-5 hover:text-gray-300 text-xs md:text-xl duration-200 justify-center items-center gap-1">
               <i className="fa fa-user"></i>
               <span>Masuk</span>

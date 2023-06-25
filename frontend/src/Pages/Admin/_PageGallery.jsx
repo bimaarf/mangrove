@@ -4,9 +4,11 @@ import { Footer } from "../Components/_Footer";
 import { SidebarAdmin } from "./Components/_SidebarAdmin";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const PageGallery = () => {
   const [imageFormat, setImageFormat] = useState([]);
+  const [loadSubmit, setLoadSubmit] = useState(false);
   const navRedirect = useNavigate();
   const handleInputImage = (e) => {
     const file = e.target.files[0];
@@ -30,21 +32,46 @@ export const PageGallery = () => {
     setImageFormat(imageFormat);
     navRedirect("/administrator/kelola-gallery");
   };
+  const handleSubmit = async (e) => {
+    setLoadSubmit(true);
+    e.preventDefault();
+    const pushServer = new FormData();
+    imageFormat.forEach((file) => {
+      pushServer.append("image[]", file.fileName);
+    });
+    const data = pushServer;
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    await axios.get("sanctum/csrf-cookie").then(() => {
+      axios.post("api/gallery/store", data, config).then((res) => {
+        setLoadSubmit(false);
+        if (res.data.status === 202)
+          return toast.warning("Masukkan data dengan benar");
+        toast.success("Gambar berhasil ditambahkan");
+        setImageFormat([])
+      });
+    });
+  };
   return (
     <>
       <div
+        className="h-96"
         style={{
           backgroundImage: `url(${ImagesBg})`,
-        }}>
+        }}></div>
+      <div className="bg-gray-200 bg-opacity-40">
         <div className="md:container md:mx-auto pb-10 md:pt-32 pt-36 mx-2">
-          <div className="md:flex md:columns-2 md:gap-10">
+          <div className="md:flex md:columns-2 md:gap-10 -mt-96">
             <SidebarAdmin />
             <div className="bg-white md:rounded-xl rounded-sm shadow md:shadow-none w-full p-3 md:p-10 ">
               <h1 className="md:text-2xl text-xl font-bold text-gray-800">
-                Kelola Gallery
+                Kelola Halaman Gallery
               </h1>
               <label className="text-gray-700 text-sm md:text-md font-semibold">
-                Upload Gambar Produk
+                Upload Gambar
               </label>{" "}
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 <label className="flex cursor-pointer shadow-sm scale-90 flex-col w-full h-32 border border-green-500 border-dashed hover:bg-slate-100 hover:border-green-600 duration-200">
@@ -92,6 +119,7 @@ export const PageGallery = () => {
                   </div>
                 ))}
               </div>
+              <button onClick={handleSubmit} className="bg-green-600 hover:bg-green-700 duration-200 px-10 py-1 text-white rounded w-1/3 float-right">Upload</button>
             </div>
           </div>
         </div>
