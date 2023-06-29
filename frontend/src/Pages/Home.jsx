@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ImagesBg from "../Images/bg-home.jpg";
 import ImgSlider1 from "../Images/img-slider-1.jpg";
 import ImgSlider2 from "../Images/img-slider-2.jpg";
@@ -9,7 +9,19 @@ import ImgSlider7 from "../Images/img-slider-7.png";
 import ImgSlider8 from "../Images/img-slider-8.png";
 import ImgSlider4 from "../Images/mangrove-home.jpg";
 import { Footer } from "./Components/_Footer";
+import axios from "axios";
 export const Home = () => {
+  const [getGallery, setGallery] = useState("");
+  const getGalleryAPI = async () => {
+    await axios.get("sanctum/csrf-cookie").then(() => {
+      axios.get("api/gallery/get").then((res) => {
+        setGallery(res.data);
+      });
+    });
+  };
+  useEffect(() => {
+    getGalleryAPI();
+  }, []);
   return (
     <>
       <div
@@ -126,78 +138,22 @@ export const Home = () => {
         </div>
         <div className="mt-12">
           <div className="flex flex-wrap">
-            <div className="flex w-1/4 flex-wrap">
-              <div className="w-full relative overflow-hidden bg-cover bg-no-repeat">
-                <img
-                  alt="gallery"
-                  className="block h-full w-full object-cover object-center transition duration-300 ease-in-out hover:scale-110"
-                  src={ImgSlider1}
-                />
-              </div>
-            </div>
-            <div className="flex w-1/4 flex-wrap">
-              <div className="w-full relative overflow-hidden bg-cover bg-no-repeat">
-                <img
-                  alt="gallery"
-                  className="block h-full w-full object-cover object-center transition duration-300 ease-in-out hover:scale-110"
-                  src={ImgSlider2}
-                />
-              </div>
-            </div>
-            <div className="flex w-1/4 flex-wrap">
-              <div className="w-full relative overflow-hidden bg-cover bg-no-repeat">
-                <img
-                  alt="gallery"
-                  className="block h-full w-full object-cover object-center transition duration-300 ease-in-out hover:scale-110"
-                  src={ImgSlider3}
-                />
-              </div>
-            </div>
-            <div className="flex w-1/4 flex-wrap">
-              <div className="w-full relative overflow-hidden bg-cover bg-no-repeat">
-                <img
-                  alt="gallery"
-                  className="block h-full w-full object-cover object-center transition duration-300 ease-in-out hover:scale-110"
-                  src={ImgSlider4}
-                />
-              </div>
-            </div>
-            <div className="flex w-1/4 flex-wrap">
-              <div className="w-full relative overflow-hidden bg-cover bg-no-repeat">
-                <img
-                  alt="gallery"
-                  className="block h-full w-full object-cover object-center transition duration-300 ease-in-out hover:scale-110"
-                  src={ImgSlider5}
-                />
-              </div>
-            </div>
-            <div className="flex w-1/4 flex-wrap">
-              <div className="w-full relative overflow-hidden bg-cover bg-no-repeat">
-                <img
-                  alt="gallery"
-                  className="block h-full w-full object-cover object-center transition duration-300 ease-in-out hover:scale-110"
-                  src={ImgSlider6}
-                />
-              </div>
-            </div>
-            <div className="flex w-1/4 flex-wrap">
-              <div className="w-full relative overflow-hidden bg-cover bg-no-repeat">
-                <img
-                  alt="gallery"
-                  className="block h-full w-full object-cover object-center transition duration-300 ease-in-out hover:scale-110"
-                  src={ImgSlider7}
-                />
-              </div>
-            </div>
-            <div className="flex w-1/4 flex-wrap">
-              <div className="w-full relative overflow-hidden bg-cover bg-no-repeat">
-                <img
-                  alt="gallery"
-                  className="block h-full w-full object-cover object-center transition duration-300 ease-in-out hover:scale-110"
-                  src={ImgSlider8}
-                />
-              </div>
-            </div>
+            {getGallery &&
+              getGallery.map((item, key) => (
+                <div key={key} className="flex w-1/4 flex-wrap">
+                  <div className="w-full relative overflow-hidden bg-cover bg-no-repeat">
+                    <img
+                      alt="gallery"
+                      src={
+                        process.env.REACT_APP_API +
+                        "Images/Gallery/" +
+                        item.image
+                      }
+                      className="block h-full w-full object-cover object-center transition duration-300 ease-in-out hover:scale-110"
+                    />
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
       </div>

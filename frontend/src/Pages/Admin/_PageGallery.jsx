@@ -48,7 +48,10 @@ export const PageGallery = () => {
     };
     await axios.get("sanctum/csrf-cookie").then(() => {
       axios.post("api/admin/gallery/store", data, config).then((res) => {
-        setLoadSubmit(false);
+        setTimeout(() => {
+          setLoadSubmit(false);
+        }, 2000);
+
         if (res.data.status === 203) return toast.warning("Masukkan gambar");
         if (res.data.status === 202)
           return toast.warning("Masukkan data dengan benar");
@@ -124,11 +127,11 @@ export const PageGallery = () => {
                   <div
                     key={index}
                     onClick={(e) => handleDelImage(e, index)}
-                    className="flex items-center shadow-sm justify-around border gap-4 m-1 p-1 hover:bg-slate-100 cursor-pointer">
+                    className="w-full h-28 mt-2 cursor-pointer relative overflow-hidden bg-cover bg-no-repeat">
                     <img
                       id="myImg"
                       src={item.url}
-                      className=" text-gray-400 group-hover:text-gray-600 w-36"
+                      className="block h-full w-full object-cover object-center transition duration-300 ease-in-out hover:scale-110 shadow-md"
                       alt={item.url}
                     />
                   </div>
@@ -136,6 +139,7 @@ export const PageGallery = () => {
               </div>
               <button
                 onClick={handleSubmit}
+                disabled={loadSubmit ? true : false}
                 className="bg-green-600 hover:bg-green-700 duration-200 px-10 py-1 text-white rounded w-1/3 float-right">
                 Upload
               </button>

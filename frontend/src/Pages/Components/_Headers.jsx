@@ -58,9 +58,7 @@ export const Headers = ({ setAuthCheck, authCheck }) => {
           </div>
         </div>
         <div
-          className={`flex xl:justify-end ${
-            authCheck ? "justify-end" : "justify-start"
-          } items-center gap-1 md:gap-4 md:mt-6 pb-4 lg:pb-0 lg:mt-0 mt-4 overflow-x-auto`}>
+          className={`flex xl:justify-end items-center gap-1 md:gap-4 md:mt-6 pb-4 lg:pb-0 lg:mt-0 mt-4 overflow-x-auto`}>
           <div
             onClick={() => {
               navRedirect("/");

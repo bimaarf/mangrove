@@ -11,6 +11,7 @@ import { Login } from "./Pages/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Headers } from "./Pages/Components/_Headers";
+import { PageBlog } from "./Pages/Admin/_PageBlog";
 
 axios.defaults.baseURL = process.env.REACT_APP_API;
 axios.defaults.headers.post["Accept"] = "application/json";
@@ -52,6 +53,7 @@ function App() {
             path="/administrator/kelola-gallery"
             element={<PageGallery />}
           />
+          <Route path="/administrator/kelola-blog" element={<PageBlog />} />
         </Routes>
       </Router>
     </>
