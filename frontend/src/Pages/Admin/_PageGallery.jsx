@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ImagesBg from "../../Images/bg-home.jpg";
 import { Footer } from "../Components/_Footer";
 import { SidebarAdmin } from "./Components/_SidebarAdmin";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ImageModal } from "./Components/Modal/Image";
 
 export const PageGallery = () => {
   const [imageFormat, setImageFormat] = useState([]);
@@ -46,15 +47,29 @@ export const PageGallery = () => {
       },
     };
     await axios.get("sanctum/csrf-cookie").then(() => {
-      axios.post("api/gallery/store", data, config).then((res) => {
+      axios.post("api/admin/gallery/store", data, config).then((res) => {
         setLoadSubmit(false);
+        if (res.data.status === 203) return toast.warning("Masukkan gambar");
         if (res.data.status === 202)
           return toast.warning("Masukkan data dengan benar");
         toast.success("Gambar berhasil ditambahkan");
-        setImageFormat([])
+        setImageFormat([]);
+        getGalleryAPI();
       });
     });
   };
+
+  const [getGallery, setGallery] = useState("");
+  const getGalleryAPI = async () => {
+    await axios.get("sanctum/csrf-cookie").then(() => {
+      axios.get("api/admin/gallery/view").then((res) => {
+        setGallery(res.data);
+      });
+    });
+  };
+  useEffect(() => {
+    getGalleryAPI();
+  }, []);
   return (
     <>
       <div
@@ -119,7 +134,32 @@ export const PageGallery = () => {
                   </div>
                 ))}
               </div>
-              <button onClick={handleSubmit} className="bg-green-600 hover:bg-green-700 duration-200 px-10 py-1 text-white rounded w-1/3 float-right">Upload</button>
+              <button
+                onClick={handleSubmit}
+                className="bg-green-600 hover:bg-green-700 duration-200 px-10 py-1 text-white rounded w-1/3 float-right">
+                Upload
+              </button>
+              <div className="grid md:grid-cols-4 grid-cols-2 gap-1 mt-20">
+                {getGallery &&
+                  getGallery.map((item, key) => (
+                    <label key={key}>
+                      <div
+                        htmlFor={`images${item.id}`}
+                        className="w-full h-32 mt-2 cursor-pointer relative overflow-hidden bg-cover bg-no-repeat">
+                        <img
+                          alt="gallery"
+                          className="block h-full w-full object-cover object-center transition duration-300 ease-in-out hover:scale-110 shadow-md"
+                          src={
+                            process.env.REACT_APP_API +
+                            "Images/Gallery/" +
+                            item.image
+                          }
+                        />
+                      </div>
+                      <ImageModal item={item} getGalleryAPI={getGalleryAPI} />
+                    </label>
+                  ))}
+              </div>
             </div>
           </div>
         </div>

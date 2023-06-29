@@ -15,7 +15,7 @@ import { Footer } from "./Components/_Footer";
 export const Gallery = () => {
   return (
     <>
-      <div className="" style={{ backgroundImage: `url(${ImagesBg})` }}>
+      <div style={{ backgroundImage: `url(${ImagesBg})` }}>
         <div className="mx-auto pt-32">
           <div className="text-white flex items-center gap-1 font-medium mt-4 md:mt-0 mb-4 ml-3 md:ml-10 text-xl md:text-3xl ">
             <i className="fa fa-image"></i>

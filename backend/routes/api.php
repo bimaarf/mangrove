@@ -20,6 +20,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function() {
-    Route::post('/gallery/store', [AdminController::class, 'galleryStore']);
+    Route::get('/admin/gallery/view', [AdminController::class, 'showImgGallery']);
+    Route::post('/admin/gallery/store', [AdminController::class, 'galleryStore']);
+    Route::post('/admin/gallery/delete/{id}', [AdminController::class, 'galleryDelete']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });

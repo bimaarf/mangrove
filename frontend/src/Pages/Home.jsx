@@ -12,63 +12,65 @@ import { Footer } from "./Components/_Footer";
 export const Home = () => {
   return (
     <>
-      <div className="carousel w-full pt-24 md:pt-0 bg-black">
+      <div
+        className="carousel w-full top-0 pt-0 bg-black"
+        style={{ height: "80vh" }}>
         <div id="slide1" className="carousel-item relative w-full">
-          <img src={ImagesBg} className="w-full" />
+          <img src={ImagesBg} className="w-full object-cover" />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a
               href="#slide4"
-              className="border py-4 px-5 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
+              className="border py-4 px-5 hover:md:scale-110 active:scale-125 swap-indeterminate duration-300 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
               ❮
             </a>
             <a
               href="#slide2"
-              className="border py-4 px-5 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
+              className="border py-4 px-5 hover:md:scale-110 active:scale-125 duration-300 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
               ❯
             </a>
           </div>
         </div>
         <div id="slide2" className="carousel-item relative w-full">
-          <img src={ImagesBg} className="w-full" />
+          <img src={ImagesBg} className="w-full object-cover" />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a
               href="#slide1"
-              className="border py-4 px-5 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
+              className="border py-4 px-5 hover:md:scale-110 active:scale-110 duration-300 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
               ❮
             </a>
             <a
               href="#slide3"
-              className="border py-4 px-5 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
+              className="border py-4 px-5 hover:md:scale-110 active:scale-110 duration-300 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
               ❯
             </a>
           </div>
         </div>
         <div id="slide3" className="carousel-item relative w-full">
-          <img src={ImagesBg} className="w-full" />
+          <img src={ImagesBg} className="w-full object-cover" />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a
               href="#slide2"
-              className="border py-4 px-5 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
+              className="border py-4 px-5 hover:md:scale-110 active:scale-110 duration-300 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
               ❮
             </a>
             <a
               href="#slide4"
-              className="border py-4 px-5 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
+              className="border py-4 px-5 hover:md:scale-110 active:scale-110 duration-300 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
               ❯
             </a>
           </div>
         </div>
         <div id="slide4" className="carousel-item relative w-full">
-          <img src={ImagesBg} className="w-full" />
+          <img src={ImagesBg} className="w-full object-cover" />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a
               href="#slide3"
-              className="border py-4 px-5 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
+              className="border py-4 px-5 hover:md:scale-110 active:scale-110 duration-300 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
               ❮
             </a>
             <a
               href="#slide1"
-              className="border py-4 px-5 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
+              className="border py-4 px-5 hover:md:scale-110 active:scale-110 duration-300 hover:bg-black rounded-full bg-transparent text-white md:text-4xl hover:bg-opacity-10">
               ❯
             </a>
           </div>
