@@ -2,13 +2,122 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Str;
 class AdminController extends Controller
 {
+    function blogGet(){
+        $__blog         = Blog::join('tb_category', 'tb_category.id', 'tb_blog.category_id')
+                            ->get(['tb_blog.*', 'tb_category.category_name']);
+        return $__blog;
+    }
+    function blogDelete($id) {
+        try {
+            $__blog = Blog::find($id);
+            $__blog->delete();
+            return response()->json([
+                'status' => 200,
+                'message' => 'deleted'
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 201,
+                'message' => 'error'
+            ]);
+        }
+    }
+    function blogUpdate(Request $request, $id) {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|max:255',
+            'body' => 'required',
+        ]);
+        if ($validator->fails())
+        {
+            return response()->json([
+                'status' => 202,
+                'message' => 'Validator error'
+            ]);
+        }
+        try {
+            $__blog                 = Blog::find($id);
+            $__blog_check = Blog::where('title', $request->title)
+                                ->where('title', '!=', $__blog->title)
+                                ->get();
+            if (count($__blog_check) > 0) {
+                return response()->json([
+                    'status' => 101,
+                    'message' => 'title must be unique'
+                ]);
+            }
+            $__blog->title          = $request->title;
+            $__blog->slug           = Str::slug($request->title);
+            $__blog->body           = $request->body;
+            $__blog->category_id    = $request->category_id;
+            $__blog->update();
+            return response()->json([
+                'status' => 200,
+                'message' => 'updated'
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 201,
+                'message' => 'Validator error'
+            ]);
+        }
+    }
+    function blogStore(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'body' => 'required',
+            'category_id' => 'required',
+            'image.*' => 'required|image|mimes:jpeg,jpg,png,webp',
+        ]);
+
+        try {
+            $__blog_check = Blog::where('title', $request->title)->get();
+            if (count($__blog_check) > 0) {
+                return response()->json([
+                    'status' => 101,
+                    'message' => 'title must be unique'
+                ]);
+            }
+            if ($request->hasFile('image')) {
+                $__blog                     = new Blog();
+                $__blog->title              = $request->title;
+                $__blog->slug               = Str::slug($request->title);
+                $__blog->body               = $request->body;
+                $__blog->category_id        = $request->category_id;
+                foreach ($request->file('image') as $file) {
+                    $filename = time() . '-' . $file->getClientOriginalName();
+                    $file->move(public_path('Images/Blog'), $filename);
+                    $data[] = $filename;
+                }
+                $__blog->image = json_encode($data);
+                $__blog->save();
+                return response()->json([
+                    'status' => 200,
+                    'messages' => 'success',
+                ]);
+            }else {
+                return response()->json([
+                    'status' => 203,
+                    'messages' => 'image required',
+                ]);
+            }
+        } catch (\Throwable $th) {
+            if ($validator->fails())
+            {
+                return response()->json([
+                    'status' => 202,
+                    'message' => 'Validator error'
+                ]);
+            }
+        }
+    }
     function categoryGet(){
         $__category = Category::all();
         return $__category;

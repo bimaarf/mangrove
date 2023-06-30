@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Blog extends Model
 {
     use HasFactory;
+    protected $table = 'tb_blog';
+    protected $fillable = ['title', 'body', 'category_id', 'image'];
+    function category() {
+        return $this->belongsTo(Category::class);
+    }
 }

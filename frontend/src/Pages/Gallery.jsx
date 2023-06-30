@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ImagesBg from "../Images/bg-home.jpg";
+import ImgSlider1 from "../Images/img-slider-1.jpg";
 import { Footer } from "./Components/_Footer";
 export const Gallery = () => {
   const [getGallery, setGallery] = useState("");

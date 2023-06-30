@@ -40,6 +40,20 @@ export const SidebarAdmin = () => {
           </div>
         </div>
       </div>
+      <div className="my-4 flex justify-center items-center gap-2 md:hidden">
+        <div
+          onClick={() => navRedirect("/administrator/kelola-gallery")}
+          className="bg-cyan-600 hover:bg-cyan-700 flex justify-start items-center gap-3 text-white rounded bg-opacity-50 hover:bg-opacity-50 p-2">
+          <i className="fa fa-paste"></i>
+          <h1>Kelola Gallery</h1>
+        </div>
+        <div
+          onClick={() => navRedirect("/administrator/kelola-blog")}
+          className="bg-cyan-600 hover:bg-cyan-700 flex justify-start items-center gap-3 text-white rounded bg-opacity-50 hover:bg-opacity-50 p-2">
+          <i className="fa fa-paste"></i>
+          <h1>Kelola Blog</h1>
+        </div>
+      </div>
     </>
   );
 };

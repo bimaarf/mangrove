@@ -20,14 +20,19 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/gallery/get', [SiteController::class, 'showGalleryImage']);
+Route::get('/blog/view', [SiteController::class, 'blogGet']);
 
-Route::middleware('auth:sanctum')->group(function() {
-    Route::get('/admin/gallery/view', [AdminController::class, 'showImgGallery']);
-    Route::post('/admin/gallery/store', [AdminController::class, 'galleryStore']);
-    Route::post('/admin/gallery/delete/{id}', [AdminController::class, 'galleryDelete']);
-    Route::get('/admin/category/view', [AdminController::class, 'categoryGet']);
-    Route::post('/admin/category/store', [AdminController::class, 'categoryStore']);
-    Route::post('/admin/category/update/{id}', [AdminController::class, 'categoryUpdate']);
-    Route::post('/admin/category/delete/{id}', [AdminController::class, 'categoryDelete']);
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum']], function () {
+    Route::get('/gallery/view', [AdminController::class, 'showImgGallery']);
+    Route::post('/gallery/store', [AdminController::class, 'galleryStore']);
+    Route::post('/gallery/delete/{id}', [AdminController::class, 'galleryDelete']);
+    Route::get('/category/view', [AdminController::class, 'categoryGet']);
+    Route::post('/category/store', [AdminController::class, 'categoryStore']);
+    Route::post('/category/update/{id}', [AdminController::class, 'categoryUpdate']);
+    Route::post('/category/delete/{id}', [AdminController::class, 'categoryDelete']);
+    Route::get('/blog/view', [AdminController::class, 'blogGet']);
+    Route::post('/blog/update/{id}', [AdminController::class, 'blogUpdate']);
+    Route::post('/blog/delete/{id}', [AdminController::class, 'blogDelete']);
+    Route::post('/blog/store', [AdminController::class, 'blogStore']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });

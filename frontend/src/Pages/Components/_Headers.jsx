@@ -18,7 +18,7 @@ export const Headers = ({ setAuthCheck, authCheck }) => {
     e.preventDefault();
     await axios.get("sanctum/csrf-cookie").then(() => {
       axios
-        .post("api/logout")
+        .post("api/admin/logout")
         .then((res) => {
           setLoadSubmit(false);
           navRedirect("/");
@@ -95,6 +95,15 @@ export const Headers = ({ setAuthCheck, authCheck }) => {
             <i className="fa fa-usd"></i>
             <span>Mitra</span>
           </label>
+          <div
+            onClick={() => {
+              navRedirect("/blog");
+              setDropdown(false);
+            }}
+            className="flex text-white cursor-pointer border py-1 px-2 whitespace-nowrap md:px-4 rounded hover:md:px-5 hover:text-gray-300 text-xs md:text-xl duration-200 justify-center items-center gap-1">
+            <i className="fa fa-globe"></i>
+            <span>Blog</span>
+          </div>
           <div
             onClick={() => {
               navRedirect("/tentang-kami");
