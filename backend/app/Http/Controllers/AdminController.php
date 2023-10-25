@@ -5,17 +5,33 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Gallery;
+use App\Models\Mangrove;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+
 class AdminController extends Controller
 {
-    function blogGet(){
+    function mangroveStore(Request $request)
+    {
+        try {
+            $__mangrove = new Mangrove();
+            $__mangrove->label = $request->label;
+            $__mangrove->y     = $request->y;
+            $__mangrove->save();
+            return response()->json(['status' => 200]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 201]);
+        }
+    }
+    function blogGet()
+    {
         $__blog         = Blog::join('tb_category', 'tb_category.id', 'tb_blog.category_id')
-                            ->get(['tb_blog.*', 'tb_category.category_name']);
+            ->get(['tb_blog.*', 'tb_category.category_name']);
         return $__blog;
     }
-    function blogDelete($id) {
+    function blogDelete($id)
+    {
         try {
             $__blog = Blog::find($id);
             $__blog->delete();
@@ -30,13 +46,13 @@ class AdminController extends Controller
             ]);
         }
     }
-    function blogUpdate(Request $request, $id) {
+    function blogUpdate(Request $request, $id)
+    {
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:255',
             'body' => 'required',
         ]);
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json([
                 'status' => 202,
                 'message' => 'Validator error'
@@ -45,8 +61,8 @@ class AdminController extends Controller
         try {
             $__blog                 = Blog::find($id);
             $__blog_check = Blog::where('title', $request->title)
-                                ->where('title', '!=', $__blog->title)
-                                ->get();
+                ->where('title', '!=', $__blog->title)
+                ->get();
             if (count($__blog_check) > 0) {
                 return response()->json([
                     'status' => 101,
@@ -69,7 +85,8 @@ class AdminController extends Controller
             ]);
         }
     }
-    function blogStore(Request $request) {
+    function blogStore(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'body' => 'required',
@@ -102,15 +119,14 @@ class AdminController extends Controller
                     'status' => 200,
                     'messages' => 'success',
                 ]);
-            }else {
+            } else {
                 return response()->json([
                     'status' => 203,
                     'messages' => 'image required',
                 ]);
             }
         } catch (\Throwable $th) {
-            if ($validator->fails())
-            {
+            if ($validator->fails()) {
                 return response()->json([
                     'status' => 202,
                     'message' => 'Validator error'
@@ -118,14 +134,16 @@ class AdminController extends Controller
             }
         }
     }
-    function categoryGet(){
+    function categoryGet()
+    {
         $__category = Category::all();
         return $__category;
     }
-    function categoryUpdate(Request $request, $id) {
+    function categoryUpdate(Request $request, $id)
+    {
         try {
-            $__category_check = Category::where('category_name' , $request->category_name)->get();
-            if (count($__category_check) > 0){
+            $__category_check = Category::where('category_name', $request->category_name)->get();
+            if (count($__category_check) > 0) {
                 return response()->json([
                     'status' => 202,
                     'message' => 'error'
@@ -145,7 +163,8 @@ class AdminController extends Controller
             ]);
         }
     }
-    function categoryDelete($id) {
+    function categoryDelete($id)
+    {
         try {
             $__category = Category::find($id);
             $__category->delete();
@@ -160,10 +179,11 @@ class AdminController extends Controller
             ]);
         }
     }
-    function categoryStore(Request $request) {
+    function categoryStore(Request $request)
+    {
         try {
-            $__category_check = Category::where('category_name' , $request->category_name)->get();
-            if (count($__category_check) > 0){
+            $__category_check = Category::where('category_name', $request->category_name)->get();
+            if (count($__category_check) > 0) {
                 return response()->json([
                     'status' => 202,
                     'message' => 'error'
@@ -183,14 +203,16 @@ class AdminController extends Controller
             ]);
         }
     }
-    function showImgGallery() {
+    function showImgGallery()
+    {
         $__gallery = Gallery::all();
         return $__gallery;
     }
-    function galleryDelete($id) {
+    function galleryDelete($id)
+    {
         try {
             $__gallery = Gallery::find($id);
-            unlink('Images/Gallery/'. $__gallery->image);
+            unlink('Images/Gallery/' . $__gallery->image);
             $__gallery->delete();
             return response()->json([
                 'status' => 200,
@@ -203,7 +225,8 @@ class AdminController extends Controller
             ]);
         }
     }
-    function galleryStore(Request $request) {
+    function galleryStore(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'image.*' => 'required|image|mimes:jpeg,jpg,png,webp',
         ]);
@@ -220,16 +243,14 @@ class AdminController extends Controller
                     'status' => 200,
                     'message' => 'success'
                 ]);
-            }
-            {
+            } {
                 return response()->json([
                     'status' => 203,
                     'message' => 'required'
                 ]);
             }
         } catch (\Throwable $th) {
-            if ($validator->fails())
-            {
+            if ($validator->fails()) {
                 return response()->json([
                     'status' => 202,
                     'message' => 'Validator error'

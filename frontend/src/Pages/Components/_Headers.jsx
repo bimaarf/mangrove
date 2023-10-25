@@ -42,7 +42,7 @@ export const Headers = ({ setAuthCheck, authCheck }) => {
       <MapLocation />
       <JumlahMangrove />
       <Donatur />
-      <div className="lg:flex justify-between items-center bg-black bg-opacity-40 backdrop-filter backdrop-blur-lg border-b fixed w-full z-50 md:px-10 px-2 py-2">
+      <div className="lg:flex justify-between items-center bg-black bg-opacity-60 backdrop-filter backdrop-blur-lg border-b fixed w-full z-50 md:px-10 px-2 py-2">
         <div
           onClick={() => {
             navRedirect("/");

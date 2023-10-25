@@ -21,8 +21,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/gallery/get', [SiteController::class, 'showGalleryImage']);
 Route::get('/blog/view', [SiteController::class, 'blogGet']);
+Route::get('/mangrove/view', [SiteController::class, 'mangroveGet']);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum']], function () {
+    Route::post('/mangrove/store', [AdminController::class, 'mangroveStore']);
     Route::get('/gallery/view', [AdminController::class, 'showImgGallery']);
     Route::post('/gallery/store', [AdminController::class, 'galleryStore']);
     Route::post('/gallery/delete/{id}', [AdminController::class, 'galleryDelete']);

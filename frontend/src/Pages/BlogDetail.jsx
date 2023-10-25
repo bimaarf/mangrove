@@ -40,7 +40,7 @@ export const BlogDetail = () => {
           </span>
           <div className="whitespace-pre-wrap font-normal">
             <span className="text-gray-800 font-bold">Mempawah Mangrove. </span>
-            <span>{getBlog.body}</span>
+            <span className="text-gray-800 font-normal">{getBlog.body}</span>
           </div>
         </div>
       </div>

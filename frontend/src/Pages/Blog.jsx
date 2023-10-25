@@ -42,7 +42,7 @@ export const Blog = () => {
                   />
                   <Link
                     to={`/blog/v/:${item.slug}`}
-                    className="font-bold text-md hover:text-orange-600 duration-200 lg:text-xl my-3">
+                    className="font-bold text-gray-800 text-md hover:text-orange-600 duration-200 lg:text-xl my-3">
                     {item.title.length > 100
                       ? item.title.substring(0, 100) + "..."
                       : item.title}
@@ -53,11 +53,11 @@ export const Blog = () => {
                       {item.category_name}
                     </span>
                   </div>
-                  <h1 className="text-start">
+                  <p className="text-start text-gray-800 font-medium">
                     {item.body.length > 250
                       ? item.body.substring(0, 250) + "..."
                       : item.body}
-                  </h1>
+                  </p>
                 </div>
               ))}
           </div>

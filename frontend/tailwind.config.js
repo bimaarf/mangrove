@@ -8,5 +8,8 @@ module.exports = {
   theme: {
     extend: {},
   },
+  daisyui: {
+    themes: ["light", "dark", "black"],
+  },
   plugins: [require("daisyui", "tw-elements/dist/plugin.cjs")],
 };
