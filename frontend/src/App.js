@@ -16,6 +16,7 @@ import { Blog } from "./Pages/Blog";
 import { BlogDetail } from "./Pages/BlogDetail";
 import { NotFound } from "./Pages/NotFound";
 import { PageMangrove } from "./Pages/Admin/_PageMangrove";
+import { StrukturOrganisasi } from "./Pages/Admin/_PageStrukturOrganisasi";
 
 axios.defaults.baseURL = process.env.REACT_APP_API;
 axios.defaults.headers.post["Accept"] = "application/json";
@@ -66,6 +67,10 @@ function App() {
               <Route
                 path="/administrator/kelola-mangrove"
                 element={<PageMangrove />}
+              />
+              <Route
+                path="/administrator/kelola-struktur-organisasi"
+                element={<StrukturOrganisasi />}
               />
             </>
           )}

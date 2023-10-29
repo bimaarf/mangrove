@@ -6,6 +6,8 @@ import ImagesBg from "../../Images/bg-home.jpg";
 import { Footer } from "../Components/_Footer";
 import { SidebarAdmin } from "./Components/_SidebarAdmin";
 import { DataMangrove, MangroveProvider } from "./Data/DataMangrove";
+import { DeleteMangrove } from "./Components/Modal/MangroveDelete";
+import { UpdateMangrove } from "./Components/Modal/MangroveUpdate";
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export const PageMangrove = () => {
@@ -34,6 +36,7 @@ export const PageMangrove = () => {
           } else {
             toast.success("Berhasil ditambahkan");
             setFormInput({ label: "", y: "" });
+            __GET_MANGROVE_API();
           }
         })
         .catch(() => {
@@ -43,6 +46,13 @@ export const PageMangrove = () => {
     });
   };
 
+  const [getMangrove, setMangrove] = useState([]);
+  const __GET_MANGROVE_API = () => {
+    axios.get("api/mangrove/view").then((res) => setMangrove(res.data));
+  };
+  useEffect(() => {
+    __GET_MANGROVE_API();
+  }, []);
   return (
     <>
       <div
@@ -56,7 +66,7 @@ export const PageMangrove = () => {
             <SidebarAdmin />
             <div className="bg-white md:rounded-xl rounded-sm shadow md:shadow-none w-full p-3 md:p-10 ">
               <h1 className="md:text-2xl text-xl font-bold text-gray-800">
-                Kelola Jumlah Mangrove :{" "}
+                Kelola Jumlah Mangrove
               </h1>
               <div className="lg:flex justify-start items-center gap-1">
                 <div className="mt-4  w-full lg:w-2/3">
@@ -90,6 +100,7 @@ export const PageMangrove = () => {
               </div>
               <div className="flex justify-end mt-6">
                 <button
+                  disabled={loadSubmit ? true : false}
                   onClick={handleSubmit}
                   className="flex justify-center items-center gap-1 bg-teal-600 hover:bg-teal-700 text-white py-2 px-4 text-sm rounded-md">
                   <span>Tambahkan</span>
@@ -103,6 +114,44 @@ export const PageMangrove = () => {
               <MangroveProvider>
                 <DataMangrove updateMangrove={handleSubmit} />
               </MangroveProvider>
+              <table className="table mt-4 border-t border-dashed w-full table-auto">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Label</th>
+                    <th>Y</th>
+                    <th>xyz</th>
+                  </tr>
+                </thead>
+                {getMangrove &&
+                  getMangrove.map((item, key) => (
+                    <tbody key={key}>
+                      <tr>
+                        <td>{key + 1}</td>
+                        <td>{item.label}</td>
+                        <td>{item.y}</td>
+                        <td>
+                          <div className="flex justify-end items-center gap-1">
+                            <UpdateMangrove
+                              getMangroveAPI={__GET_MANGROVE_API}
+                              item={item}
+                            />
+                            <DeleteMangrove
+                              getMangroveAPI={__GET_MANGROVE_API}
+                              item={item}
+                            />
+                            <label
+                              htmlFor={`update-mangrove${item.id}`}
+                              className="fa-solid fa-pencil cursor-pointer px-3 py-1 rounded bg-orange-600 hover:bg-orange-700 text-sm text-white"></label>
+                            <label
+                              htmlFor={`delete-mangrove${item.id}`}
+                              className="fa-solid fa-trash cursor-pointer px-3 py-1 rounded bg-red-600 hover:bg-red-700 text-sm text-white"></label>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  ))}
+              </table>
             </div>
           </div>
         </div>

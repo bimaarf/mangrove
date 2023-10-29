@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\StrukturOrgController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,9 +23,12 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/gallery/get', [SiteController::class, 'showGalleryImage']);
 Route::get('/blog/view', [SiteController::class, 'blogGet']);
 Route::get('/mangrove/view', [SiteController::class, 'mangroveGet']);
-
+Route::get('/struktur-organisasi/view', [StrukturOrgController::class, 'view']);
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum']], function () {
+    Route::post('/struktur-organisasi/update', [StrukturOrgController::class, 'update']);
     Route::post('/mangrove/store', [AdminController::class, 'mangroveStore']);
+    Route::post('/mangrove/update/{id_mangrove}', [AdminController::class, 'mangroveUpdate']);
+    Route::post('/mangrove/delete/{id_mangrove}', [AdminController::class, 'mangroveDelete']);
     Route::get('/gallery/view', [AdminController::class, 'showImgGallery']);
     Route::post('/gallery/store', [AdminController::class, 'galleryStore']);
     Route::post('/gallery/delete/{id}', [AdminController::class, 'galleryDelete']);

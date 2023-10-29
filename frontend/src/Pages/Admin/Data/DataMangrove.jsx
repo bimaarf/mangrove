@@ -8,13 +8,22 @@ const MangroveContext = React.createContext();
 
 export function MangroveProvider({ children }) {
   const [getMangrove, setMangrove] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const updateMangrove = (newData) => {
     setMangrove(newData);
   };
 
+  useEffect(() => {
+    // Panggil data Mangrove saat komponen dimuat
+    axios.get("api/mangrove/view").then((res) => {
+      updateMangrove(res.data);
+      setLoading(false);
+    });
+  }, []); // Empty dependency array ensures this effect runs once
+
   return (
-    <MangroveContext.Provider value={{ getMangrove, updateMangrove }}>
+    <MangroveContext.Provider value={{ getMangrove, updateMangrove, loading }}>
       {children}
     </MangroveContext.Provider>
   );
@@ -25,7 +34,7 @@ export function useMangrove() {
 }
 
 export const DataMangrove = () => {
-  const { getMangrove, updateMangrove } = useMangrove();
+  const { getMangrove, updateMangrove, loading } = useMangrove();
 
   const options = {
     title: {
@@ -40,14 +49,26 @@ export const DataMangrove = () => {
   };
 
   const __Get_Mangrove_API = () => {
+    // Reload data Mangrove
     axios.get("api/mangrove/view").then((res) => {
       updateMangrove(res.data);
     });
   };
 
-  useEffect(() => {
-    __Get_Mangrove_API();
-  }, [updateMangrove]);
+  if (loading) {
+    return <p>Loading...</p>; // Tampilkan pesan loading saat data sedang diambil
+  }
 
-  return <CanvasJSChart options={options} />;
+  return (
+    <div>
+      <CanvasJSChart options={options} />
+      <div className="flex justify-center">
+        <button
+          className="bg-orange-500 rounded text-white px-4 py-1 animate-pulse text-xs"
+          onClick={__Get_Mangrove_API}>
+          Reload Data
+        </button>
+      </div>
+    </div>
+  );
 };

@@ -12,6 +12,28 @@ use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
+    function mangroveDelete($id_mangrove)
+    {
+        try {
+            $__mangrove = Mangrove::find($id_mangrove);
+            $__mangrove->delete();
+            return response()->json(['status' => 200]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 201]);
+        }
+    }
+    function mangroveUpdate(Request $request, $id_mangrove)
+    {
+        try {
+            $__mangrove = Mangrove::find($id_mangrove);
+            $__mangrove->label  = $request->label;
+            $__mangrove->y      = $request->y;
+            $__mangrove->update();
+            return response()->json(['status' => 200]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 201]);
+        }
+    }
     function mangroveStore(Request $request)
     {
         try {
