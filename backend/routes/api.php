@@ -24,8 +24,12 @@ Route::get('/gallery/get', [SiteController::class, 'showGalleryImage']);
 Route::get('/blog/view', [SiteController::class, 'blogGet']);
 Route::get('/mangrove/view', [SiteController::class, 'mangroveGet']);
 Route::get('/struktur-organisasi/view', [StrukturOrgController::class, 'view']);
+Route::get('/mitra-donatur/view', [StrukturOrgController::class, 'view']);
+Route::get('/mitra-donatur/view', [AdminController::class, 'mitraGet']);
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum']], function () {
     Route::post('/struktur-organisasi/update', [StrukturOrgController::class, 'update']);
+    Route::post('/mitra-donatur/store', [AdminController::class, 'mitraStore']);
+    Route::post('/mitra-donatur/delete/{id_mitra}', [AdminController::class, 'mitraDelete']);
     Route::post('/mangrove/store', [AdminController::class, 'mangroveStore']);
     Route::post('/mangrove/update/{id_mangrove}', [AdminController::class, 'mangroveUpdate']);
     Route::post('/mangrove/delete/{id_mangrove}', [AdminController::class, 'mangroveDelete']);

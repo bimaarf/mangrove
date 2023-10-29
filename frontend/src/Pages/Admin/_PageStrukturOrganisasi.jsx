@@ -103,7 +103,9 @@ export const StrukturOrganisasi = () => {
                 />
               </div>
               <div className="mt-2">
-                <label htmlFor="perencanaan_dan_program" className="font-bold text-teal-600">
+                <label
+                  htmlFor="perencanaan_dan_program"
+                  className="font-bold text-teal-600">
                   Koord. Bidang Perencanaan Dan Program
                 </label>
                 <input
@@ -117,7 +119,9 @@ export const StrukturOrganisasi = () => {
                 />
               </div>
               <div className="mt-2">
-                <label htmlFor="pendidikan_lingkungan_hidup" className="font-bold text-teal-600">
+                <label
+                  htmlFor="pendidikan_lingkungan_hidup"
+                  className="font-bold text-teal-600">
                   Koord. Bidang Pendidikan Lingkungan Hidup
                 </label>
                 <input
@@ -131,7 +135,9 @@ export const StrukturOrganisasi = () => {
                 />
               </div>
               <div className="mt-2">
-                <label htmlFor="pengembangan_usaha" className="font-bold text-teal-600">
+                <label
+                  htmlFor="pengembangan_usaha"
+                  className="font-bold text-teal-600">
                   Koord. Bidang Pengembangan Usaha
                 </label>
                 <input
@@ -159,7 +165,9 @@ export const StrukturOrganisasi = () => {
                 />
               </div>
               <div className="mt-2">
-                <label htmlFor="desa_penibung" className="font-bold text-teal-600">
+                <label
+                  htmlFor="desa_penibung"
+                  className="font-bold text-teal-600">
                   Koord. Lapangan Desa Penibung
                 </label>
                 <input
@@ -173,7 +181,9 @@ export const StrukturOrganisasi = () => {
                 />
               </div>
               <div className="mt-2">
-                <label htmlFor="desa_sungai_bakau_besar" className="font-bold text-teal-600">
+                <label
+                  htmlFor="desa_sungai_bakau_besar"
+                  className="font-bold text-teal-600">
                   Koord. Lapangan Sungai Bakau Besar
                 </label>
                 <input
@@ -187,7 +197,9 @@ export const StrukturOrganisasi = () => {
                 />
               </div>
               <div className="mt-2">
-                <label htmlFor="desa_sungai_bakau_kecil" className="font-bold text-teal-600">
+                <label
+                  htmlFor="desa_sungai_bakau_kecil"
+                  className="font-bold text-teal-600">
                   Koord. Lapangan Desa Sungai Bakau Kecil
                 </label>
                 <input
@@ -201,7 +213,9 @@ export const StrukturOrganisasi = () => {
                 />
               </div>
               <div className="mt-2">
-                <label htmlFor="desa_sungai_purun_kecil" className="font-bold text-teal-600">
+                <label
+                  htmlFor="desa_sungai_purun_kecil"
+                  className="font-bold text-teal-600">
                   Koord. Lapangan Desa Sungai Purun Kecil
                 </label>
                 <input

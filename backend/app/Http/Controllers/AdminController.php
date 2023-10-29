@@ -6,12 +6,40 @@ use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Gallery;
 use App\Models\Mangrove;
+use App\Models\Mitra;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
+    public function mitraGet()
+    {
+        $__mitra = Mitra::all();
+        return response()->json($__mitra);
+    }
+
+    public function mitraStore(Request $request)
+    {
+        try {
+            $_mitra = new Mitra;
+            $_mitra->fill($request->all());
+            $_mitra->save();
+            return response()->json(['status' => 200]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 201]);
+        }
+    }
+    public function mitraDelete($id_mitra)
+    {
+        try {
+            $_mitra = Mitra::find($id_mitra);
+            $_mitra->delete();
+            return response()->json(['status' => 200]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 201]);
+        }
+    }
     function mangroveDelete($id_mangrove)
     {
         try {
