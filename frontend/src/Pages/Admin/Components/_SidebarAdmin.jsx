@@ -7,17 +7,17 @@ export const SidebarAdmin = () => {
   const menu = [
     {
       label: "Kelola Gallery",
-      icon: "fa fa-paste",
+      icon: "fa-solid fa-image",
       url: "/administrator/kelola-gallery",
     },
     {
       label: "Kelola Mangrove",
-      icon: "fa fa-paste",
+      icon: "fa-solid fa-leaf",
       url: "/administrator/kelola-mangrove",
     },
     {
       label: "Kelola Blog",
-      icon: "fa fa-paste",
+      icon: "fa-solid fa-bell",
       url: "/administrator/kelola-blog",
     },
     {
@@ -27,12 +27,12 @@ export const SidebarAdmin = () => {
     },
     {
       label: "Kelola Mitra & Donatur",
-      icon: "fa fa-paste",
+      icon: "fa-solid fa-sitemap",
       url: "/administrator/kelola-mitra-donatur",
     },
     {
       label: "Kelola Pengunjung",
-      icon: "fa fa-paste",
+      icon: "fa-solid fa-person-hiking",
       url: "/administrator/kelola-pengunjung",
     },
   ];
@@ -67,7 +67,7 @@ export const SidebarAdmin = () => {
           </div>
         </div>
       </div>
-      <div className="btm-nav md:hidden">
+      <div className="btm-nav md:hidden bg-white z-50 text-sm">
         {menu.map((item, key) => (
           <button
             onClick={() => navRedirect(item.url)}

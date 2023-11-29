@@ -82,7 +82,7 @@ export const MitraDonatur = () => {
                 Mitra
               </h1>
 
-              <div className="flex justify-center items-center gap-1">
+              <div className="md:flex justify-center items-center gap-1">
                 <div className="mt-2 md:w-1/3">
                   <label
                     htmlFor="pemberi_dana"
@@ -140,37 +140,39 @@ export const MitraDonatur = () => {
                   )}
                 </button>
               </div>
-              <table className="table mt-4 border-t border-dashed w-full table-auto">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Pemberi Dana</th>
-                    <th>Kegiatan</th>
-                    <th>Tahun</th>
-                    <th>Delete</th>
-                  </tr>
-                </thead>
-                {getMitra &&
-                  getMitra.map((item, key) => (
-                    <tbody>
-                      <tr>
-                        <td>{key + 1}</td>
-                        <td>{item.pemberi_dana}</td>
-                        <td>{item.kegiatan}</td>
-                        <td>{item.tahun}</td>
-                        <td>
-                          <div className="flex justify-end items-center">
-                            <button
-                              disabled={loadSubmit ? true : false}
-                              value={item.id}
-                              onClick={handleDelete}
-                              className="px-4 py-1 text-sm duration-200 bg-red-600 hover:bg-red-700 text-white rounded fa-solid fa-trash"></button>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  ))}
-              </table>
+              <div className="overflow-x-auto">
+                <table className="table mt-4 border-t border-dashed w-full table-auto">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Pemberi Dana</th>
+                      <th>Kegiatan</th>
+                      <th>Tahun</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  {getMitra &&
+                    getMitra.map((item, key) => (
+                      <tbody key={key}>
+                        <tr>
+                          <td>{key + 1}</td>
+                          <td>{item.pemberi_dana}</td>
+                          <td>{item.kegiatan}</td>
+                          <td>{item.tahun}</td>
+                          <td>
+                            <div className="flex justify-end items-center">
+                              <button
+                                disabled={loadSubmit ? true : false}
+                                value={item.id}
+                                onClick={handleDelete}
+                                className="px-4 py-1 text-sm duration-200 bg-red-600 hover:bg-red-700 text-white rounded fa-solid fa-trash"></button>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    ))}
+                </table>
+              </div>
             </div>
           </div>
         </div>
