@@ -18,6 +18,7 @@ import { NotFound } from "./Pages/NotFound";
 import { PageMangrove } from "./Pages/Admin/_PageMangrove";
 import { StrukturOrganisasi } from "./Pages/Admin/_PageStrukturOrganisasi";
 import { MitraDonatur } from "./Pages/Admin/_PageMitraDonatur";
+import { Pengunjung } from "./Pages/Admin/_PagePengunjung";
 
 axios.defaults.baseURL = process.env.REACT_APP_API;
 axios.defaults.headers.post["Accept"] = "application/json";
@@ -76,6 +77,10 @@ function App() {
               <Route
                 path="/administrator/kelola-mitra-donatur"
                 element={<MitraDonatur />}
+              />
+              <Route
+                path="/administrator/kelola-pengunjung"
+                element={<Pengunjung />}
               />
             </>
           )}

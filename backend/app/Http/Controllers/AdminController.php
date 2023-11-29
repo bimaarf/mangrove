@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Gallery;
 use App\Models\Mangrove;
 use App\Models\Mitra;
+use App\Models\Pengunjung;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -35,6 +36,33 @@ class AdminController extends Controller
         try {
             $_mitra = Mitra::find($id_mitra);
             $_mitra->delete();
+            return response()->json(['status' => 200]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 201]);
+        }
+    }
+    public function pengunjungGet()
+    {
+        $__pengunjung = Pengunjung::all();
+        return response()->json($__pengunjung);
+    }
+
+    public function pengunjungStore(Request $request)
+    {
+        try {
+            $__pengunjung = new Pengunjung();
+            $__pengunjung->fill($request->all());
+            $__pengunjung->save();
+            return response()->json(['status' => 200]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 201]);
+        }
+    }
+    public function pengunjungDelete($id_pengunjung)
+    {
+        try {
+            $__pengunjung = Pengunjung::find($id_pengunjung);
+            $__pengunjung->delete();
             return response()->json(['status' => 200]);
         } catch (\Throwable $th) {
             return response()->json(['status' => 201]);

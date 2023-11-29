@@ -4,39 +4,85 @@ import { Footer } from "../Components/_Footer";
 import { SidebarAdmin } from "./Components/_SidebarAdmin";
 import axios from "axios";
 import { toast } from "react-toastify";
-
 export const StrukturOrganisasi = () => {
   const [loadSubmit, setLoadSubmit] = useState(false);
-  const [formInput, setFormInput] = useState({});
+  const [formInput, setFormInput] = useState({
+    ketua: "",
+    sekretaris: "",
+    bendahara: "",
+    perencanaan_dan_program: "",
+    pendidikan_lingkungan_hidup: "",
+    pengembangan_usaha: "",
+    desa_pasir: "",
+    desa_penibung: "",
+    desa_sungai_bakau_besar: "",
+    desa_sungai_bakau_kecil: "",
+    desa_sungai_purun_kecil: "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormInput({ ...formInput, [name]: value });
+    setFormInput((prevFormInput) => ({ ...prevFormInput, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoadSubmit(true);
     const data = formInput;
-    await axios.get("sanctum/csrf-cookie").then(() => {
-      axios
-        .post("api/admin/struktur-organisasi/update", data)
-        .then((res) => {
-          setLoadSubmit(false);
-          if (res.data.status === 201) return toast.warning("server error");
-          toast.success("Berhasil diubah");
-        })
-        .catch((error) => {
-          toast.error("Gagal mengirim data. Silakan coba lagi.");
-          setLoadSubmit(false);
-        });
-    });
-  };
 
-  const __GET__STR_API = () => {
-    axios.get("api/struktur-organisasi/view").then((res) => {
-      setFormInput(res.data[0]);
-    });
+    try {
+      await axios.get("sanctum/csrf-cookie");
+      const res = await axios.post(
+        "api/admin/struktur-organisasi/update",
+        data
+      );
+
+      setLoadSubmit(false);
+      if (res.data.status === 201) {
+        return toast.warning("server error");
+      }
+
+      toast.success("Berhasil diubah");
+    } catch (error) {
+      toast.error("Gagal mengirim data. Silakan coba lagi.");
+      setLoadSubmit(false);
+    }
+  };
+  const __GET__STR_API = async () => {
+    try {
+      const res = await axios.get("api/struktur-organisasi/view");
+      setFormInput(
+        res.data[0] || {
+          ketua: "",
+          sekretaris: "",
+          bendahara: "",
+          perencanaan_dan_program: "",
+          pendidikan_lingkungan_hidup: "",
+          pengembangan_usaha: "",
+          desa_pasir: "",
+          desa_penibung: "",
+          desa_sungai_bakau_besar: "",
+          desa_sungai_bakau_kecil: "",
+          desa_sungai_purun_kecil: "",
+        }
+      );
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      // Set default values in case of an error
+      setFormInput({
+        ketua: "",
+        sekretaris: "",
+        bendahara: "",
+        perencanaan_dan_program: "",
+        pendidikan_lingkungan_hidup: "",
+        pengembangan_usaha: "",
+        desa_pasir: "",
+        desa_penibung: "",
+        desa_sungai_bakau_besar: "",
+        desa_sungai_bakau_kecil: "",
+        desa_sungai_purun_kecil: "",
+      });
+    }
   };
 
   useEffect(() => {
@@ -65,7 +111,7 @@ export const StrukturOrganisasi = () => {
                   Ketua
                 </label>
                 <input
-                  value={formInput.ketua}
+                  defaultValue={formInput.ketua}
                   type="text"
                   name="ketua"
                   id="ketua"
@@ -79,7 +125,7 @@ export const StrukturOrganisasi = () => {
                   Sekretaris
                 </label>
                 <input
-                  value={formInput.sekretaris}
+                  defaultValue={formInput.sekretaris}
                   type="text"
                   name="sekretaris"
                   id="sekretaris"
@@ -93,7 +139,7 @@ export const StrukturOrganisasi = () => {
                   Bendahara
                 </label>
                 <input
-                  value={formInput.bendahara}
+                  defaultValue={formInput.bendahara}
                   type="text"
                   name="bendahara"
                   id="bendahara"
@@ -109,7 +155,7 @@ export const StrukturOrganisasi = () => {
                   Koord. Bidang Perencanaan Dan Program
                 </label>
                 <input
-                  value={formInput.perencanaan_dan_program}
+                  defaultValue={formInput.perencanaan_dan_program}
                   type="text"
                   name="perencanaan_dan_program"
                   id="perencanaan_dan_program"
@@ -125,7 +171,7 @@ export const StrukturOrganisasi = () => {
                   Koord. Bidang Pendidikan Lingkungan Hidup
                 </label>
                 <input
-                  value={formInput.pendidikan_lingkungan_hidup}
+                  defaultValue={formInput.pendidikan_lingkungan_hidup}
                   type="text"
                   name="pendidikan_lingkungan_hidup"
                   id="pendidikan_lingkungan_hidup"
@@ -141,7 +187,7 @@ export const StrukturOrganisasi = () => {
                   Koord. Bidang Pengembangan Usaha
                 </label>
                 <input
-                  value={formInput.pengembangan_usaha}
+                  defaultValue={formInput.pengembangan_usaha}
                   type="text"
                   name="pengembangan_usaha"
                   id="pengembangan_usaha"
@@ -155,7 +201,7 @@ export const StrukturOrganisasi = () => {
                   Koord. Lapangan Desa Pasir
                 </label>
                 <input
-                  value={formInput.desa_pasir}
+                  defaultValue={formInput.desa_pasir}
                   type="text"
                   name="desa_pasir"
                   id="desa_pasir"
@@ -171,7 +217,7 @@ export const StrukturOrganisasi = () => {
                   Koord. Lapangan Desa Penibung
                 </label>
                 <input
-                  value={formInput.desa_penibung}
+                  defaultValue={formInput.desa_penibung}
                   type="text"
                   name="desa_penibung"
                   id="desa_penibung"
@@ -187,7 +233,7 @@ export const StrukturOrganisasi = () => {
                   Koord. Lapangan Sungai Bakau Besar
                 </label>
                 <input
-                  value={formInput.desa_sungai_bakau_besar}
+                  defaultValue={formInput.desa_sungai_bakau_besar}
                   type="text"
                   name="desa_sungai_bakau_besar"
                   id="desa_pendesa_sungai_bakau_besaribung"
@@ -203,7 +249,7 @@ export const StrukturOrganisasi = () => {
                   Koord. Lapangan Desa Sungai Bakau Kecil
                 </label>
                 <input
-                  value={formInput.desa_sungai_bakau_kecil}
+                  defaultValue={formInput.desa_sungai_bakau_kecil}
                   type="text"
                   name="desa_sungai_bakau_kecil"
                   id="desa_sungai_bakau_kecil"
@@ -219,7 +265,7 @@ export const StrukturOrganisasi = () => {
                   Koord. Lapangan Desa Sungai Purun Kecil
                 </label>
                 <input
-                  value={formInput.desa_sungai_purun_kecil}
+                  defaultValue={formInput.desa_sungai_purun_kecil}
                   type="text"
                   name="desa_sungai_purun_kecil"
                   id="desa_sungai_purun_kecil"
@@ -234,7 +280,7 @@ export const StrukturOrganisasi = () => {
                   type="submit"
                   onClick={handleSubmit}
                   disabled={loadSubmit}
-                  className="bg-cyan-600 hover-bg-cyan-700 duration-200 text-sm text-white rounded px-4 py-1 mt-4">
+                  className="bg-cyan-600 hover-bg-cyan-700 duration-200 text-sm text-white rounded px-4 py-1 mt-4 flex items-center gap-1">
                   <span>Submit</span>
                   {loadSubmit && (
                     <i className="fa-solid fa-spinner animate-spin"></i>
