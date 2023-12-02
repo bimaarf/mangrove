@@ -30,10 +30,12 @@ Route::get('/pengunjung/view', [AdminController::class, 'pengunjungGet']);
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum']], function () {
     Route::post('/struktur-organisasi/update', [StrukturOrgController::class, 'update']);
     Route::post('/mitra-donatur/store', [AdminController::class, 'mitraStore']);
+    Route::post('/mitra-donatur/update/{id_mitra}', [AdminController::class, 'mitraUpdate']);
     Route::post('/mitra-donatur/delete/{id_mitra}', [AdminController::class, 'mitraDelete']);
     // --pengunjung
     Route::post('/pengunjung/store', [AdminController::class, 'pengunjungStore']);
-    Route::post('/pengunjung/delete/{id_mitra}', [AdminController::class, 'pengunjungDelete']);
+    Route::post('/pengunjung/update/{id_pengunjung}', [AdminController::class, 'pengunjungUpdate']);
+    Route::post('/pengunjung/delete/{id_pengunjung}', [AdminController::class, 'pengunjungDelete']);
     // --pengunjung
     Route::post('/mangrove/store', [AdminController::class, 'mangroveStore']);
     Route::post('/mangrove/update/{id_mangrove}', [AdminController::class, 'mangroveUpdate']);

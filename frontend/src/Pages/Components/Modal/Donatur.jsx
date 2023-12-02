@@ -34,7 +34,7 @@ export const Donatur = () => {
               </thead>
               {getMitra &&
                 getMitra.map((item, key) => (
-                  <tbody>
+                  <tbody key={key}>
                     <tr>
                       <td>{key + 1}</td>
                       <td>{item.pemberi_dana}</td>

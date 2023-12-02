@@ -5,6 +5,7 @@ import { SidebarAdmin } from "./Components/_SidebarAdmin";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
+import { ModalMitraUpdate } from "./Components/Modal/MitraUpdate";
 
 export const MitraDonatur = () => {
   const [loadSubmit, setLoadSubmit] = useState(false);
@@ -95,7 +96,7 @@ export const MitraDonatur = () => {
                     name="pemberi_dana"
                     id="pemberi_dana"
                     placeholder="Ketikkan sesuatu..."
-                    className="outline-none border px-2 py-1 focus:border-green-500 active:scale-105 duration-300 form-control w-full "
+                    className="outline-none border px-2 py-2 focus:border-green-500 active:scale-105 duration-300 form-control w-full "
                     onChange={handleChange}
                   />
                 </div>
@@ -109,7 +110,7 @@ export const MitraDonatur = () => {
                     name="kegiatan"
                     id="kegiatan"
                     placeholder="Ketikkan sesuatu..."
-                    className="outline-none border px-2 py-1 focus:border-green-500 active:scale-105 duration-300 form-control w-full "
+                    className="outline-none border px-2 py-2 focus:border-green-500 active:scale-105 duration-300 form-control w-full "
                     onChange={handleChange}
                   />
                 </div>
@@ -123,7 +124,7 @@ export const MitraDonatur = () => {
                     name="tahun"
                     id="tahun"
                     placeholder="Ketikkan sesuatu..."
-                    className="outline-none border px-2 py-1 focus:border-green-500 active:scale-105 duration-300 form-control w-full "
+                    className="outline-none border px-2 py-2 focus:border-green-500 active:scale-105 duration-300 form-control w-full "
                     onChange={handleChange}
                   />
                 </div>
@@ -133,7 +134,7 @@ export const MitraDonatur = () => {
                   type="submit"
                   onClick={handleSubmit}
                   disabled={loadSubmit}
-                  className="bg-cyan-600 hover-bg-cyan-700 duration-200 text-sm text-white rounded px-4 py-1 mt-4">
+                  className="bg-cyan-600 hover-bg-cyan-700 duration-200 text-sm text-white rounded px-4 py-2 mt-4">
                   <span>Tambahkan</span>
                   {loadSubmit && (
                     <i className="fa-solid fa-spinner animate-spin"></i>
@@ -160,7 +161,14 @@ export const MitraDonatur = () => {
                           <td>{item.kegiatan}</td>
                           <td>{item.tahun}</td>
                           <td>
-                            <div className="flex justify-end items-center">
+                            <ModalMitraUpdate
+                              item={item}
+                              __GET_MITRA_API={__GET_MITRA_API}
+                            />
+                            <div className="flex justify-end items-center gap-1">
+                              <label
+                                htmlFor={`modal-mitra-update-${item.id}`}
+                                className="px-4 py-1 text-sm duration-200 cursor-pointer bg-orange-600 hover:bg-orange-700 text-white rounded fa-solid fa-pencil"></label>
                               <button
                                 disabled={loadSubmit ? true : false}
                                 value={item.id}

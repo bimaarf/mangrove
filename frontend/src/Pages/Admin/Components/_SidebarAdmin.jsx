@@ -22,12 +22,12 @@ export const SidebarAdmin = () => {
     },
     {
       label: "Struktur Organisasi",
-      icon: "fa fa-paste",
+      icon: "fa-solid fa-sitemap",
       url: "/administrator/kelola-struktur-organisasi",
     },
     {
       label: "Kelola Mitra & Donatur",
-      icon: "fa-solid fa-sitemap",
+      icon: "fa-solid fa-minimize",
       url: "/administrator/kelola-mitra-donatur",
     },
     {
@@ -56,7 +56,7 @@ export const SidebarAdmin = () => {
                 location.pathname === item.url
                   ? "bg-yellow-500 text-white"
                   : "hover:bg-yellow-500 text-gray-700 hover:text-white"
-              } flex gap-3 p-3 cursor-pointer text-xl  duration-200 ease-in-out rounded-xl mt-4 justify-start items-center`}>
+              } flex gap-3 p-3 cursor-pointer text-xl  duration-200 ease-in-out rounded-xl mt-4 justify-start items-center glass`}>
               <i className={item.icon}></i>
               <h1 className="font-normal">{item.label}</h1>
             </div>
@@ -72,7 +72,10 @@ export const SidebarAdmin = () => {
           <button
             onClick={() => navRedirect(item.url)}
             key={key}
-            className={location.pathname === item.url && "active"}>
+            className={`${
+              location.pathname === item.url &&
+              "active bg-gray-500 rounded-t-xl text-white"
+            } w-full p-1 duration-500 ease-linear`}>
             <i className={item.icon}></i>
             <span className="btm-nav-label">{item.label.split(" ")[1]}</span>
           </button>

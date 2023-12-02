@@ -31,6 +31,17 @@ class AdminController extends Controller
             return response()->json(['status' => 201]);
         }
     }
+    public function mitraUpdate(Request $request, $id_mitra)
+    {
+        try {
+            $_mitra = Mitra::find($id_mitra);
+            $_mitra->fill($request->all());
+            $_mitra->update();
+            return response()->json(['status' => 200]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 201]);
+        }
+    }
     public function mitraDelete($id_mitra)
     {
         try {
@@ -53,6 +64,17 @@ class AdminController extends Controller
             $__pengunjung = new Pengunjung();
             $__pengunjung->fill($request->all());
             $__pengunjung->save();
+            return response()->json(['status' => 200]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 201]);
+        }
+    }
+    public function pengunjungUpdate(Request $request, $id_pengunjung)
+    {
+        try {
+            $__pengunjung = Pengunjung::find($id_pengunjung);
+            $__pengunjung->fill($request->all());
+            $__pengunjung->update();
             return response()->json(['status' => 200]);
         } catch (\Throwable $th) {
             return response()->json(['status' => 201]);

@@ -5,6 +5,7 @@ import { SidebarAdmin } from "./Components/_SidebarAdmin";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
+import { ModalPengunjungUpdate } from "./Components/Modal/PengunjungUpdate";
 
 export const Pengunjung = () => {
   const [loadSubmit, setLoadSubmit] = useState(false);
@@ -95,7 +96,7 @@ export const Pengunjung = () => {
                     name="nama_pengunjung"
                     id="nama_pengunjung"
                     placeholder="Ketikkan sesuatu..."
-                    className="outline-none border px-2 py-1 focus:border-green-500 active:scale-105 duration-300 form-control w-full "
+                    className="outline-none border px-2 py-2 focus:border-green-500 active:scale-105 duration-300 form-control w-full "
                     onChange={handleChange}
                   />
                 </div>
@@ -111,7 +112,7 @@ export const Pengunjung = () => {
                     name="nama_kegiatan"
                     id="nama_kegiatan"
                     placeholder="Ketikkan sesuatu..."
-                    className="outline-none border px-2 py-1 focus:border-green-500 active:scale-105 duration-300 form-control w-full "
+                    className="outline-none border px-2 py-2 focus:border-green-500 active:scale-105 duration-300 form-control w-full "
                     onChange={handleChange}
                   />
                 </div>
@@ -125,7 +126,7 @@ export const Pengunjung = () => {
                     name="tahun"
                     id="tahun"
                     placeholder="Ketikkan sesuatu..."
-                    className="outline-none border px-2 py-1 focus:border-green-500 active:scale-105 duration-300 form-control w-full "
+                    className="outline-none border px-2 py-2 focus:border-green-500 active:scale-105 duration-300 form-control w-full "
                     onChange={handleChange}
                   />
                 </div>
@@ -135,7 +136,7 @@ export const Pengunjung = () => {
                   type="submit"
                   onClick={handleSubmit}
                   disabled={loadSubmit}
-                  className="bg-cyan-600 hover-bg-cyan-700 duration-200 text-sm text-white rounded px-4 py-1 mt-4">
+                  className="bg-cyan-600 hover-bg-cyan-700 duration-200 text-sm text-white rounded px-4 py-2 mt-4">
                   <span>Tambahkan</span>
                   {loadSubmit && (
                     <i className="fa-solid fa-spinner animate-spin"></i>
@@ -147,10 +148,10 @@ export const Pengunjung = () => {
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Pemberi Dana</th>
-                      <th>Kegiatan</th>
+                      <th>Nama Pengunjung</th>
+                      <th>Nama Kegiatan</th>
                       <th>Tahun</th>
-                      <th>Delete</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   {getMitra &&
@@ -162,7 +163,14 @@ export const Pengunjung = () => {
                           <td>{item.nama_kegiatan}</td>
                           <td>{item.tahun}</td>
                           <td>
-                            <div className="flex justify-end items-center">
+                            <ModalPengunjungUpdate
+                              item={item}
+                              __GET_DATA_API={__GET_DATA_API}
+                            />
+                            <div className="flex gap-1 justify-end items-center">
+                              <label
+                                htmlFor={`modal-pengunjung-update-${item.id}`}
+                                className="px-4 py-1 text-sm duration-200 bg-orange-600 hover:bg-orange-700 cursor-pointer text-white rounded fa-solid fa-pencil"></label>
                               <button
                                 disabled={loadSubmit ? true : false}
                                 value={item.id}
