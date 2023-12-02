@@ -19,6 +19,7 @@ import { PageMangrove } from "./Pages/Admin/_PageMangrove";
 import { StrukturOrganisasi } from "./Pages/Admin/_PageStrukturOrganisasi";
 import { MitraDonatur } from "./Pages/Admin/_PageMitraDonatur";
 import { Pengunjung } from "./Pages/Admin/_PagePengunjung";
+import { LoadingScreen } from "./LoadingScreen";
 
 axios.defaults.baseURL = process.env.REACT_APP_API;
 axios.defaults.headers.post["Accept"] = "application/json";
@@ -34,17 +35,36 @@ axios.interceptors.request.use(function (config) {
 function App() {
   const [authCheck, setAuthCheck] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onLoad = async () => {
+    setIsLoading(true);
+
+    try {
+      await axios.get("sanctum/csrf-cookie");
+      const res = await axios.post("api/admin/onload");
+
+      setIsLoading(false);
+    } catch (error) {
+      secureLocalStorage.clear();
+      setAuthCheck(false);
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (!cookies.auth_token || !secureLocalStorage.getItem("auth_token")) {
       secureLocalStorage.clear();
       removeCookie(["auth_token"]);
       setAuthCheck(false);
     } else {
+      onLoad();
       setAuthCheck(true);
     }
   }, []);
   return (
     <>
+      {isLoading && <LoadingScreen />}
       <ToastContainer />
       <Router>
         <Headers setAuthCheck={setAuthCheck} authCheck={authCheck} />

@@ -28,6 +28,8 @@ Route::get('/mitra-donatur/view', [StrukturOrgController::class, 'view']);
 Route::get('/mitra-donatur/view', [AdminController::class, 'mitraGet']);
 Route::get('/pengunjung/view', [AdminController::class, 'pengunjungGet']);
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum']], function () {
+    Route::post('/onload', [AuthController::class, 'onload']);
+
     Route::post('/struktur-organisasi/update', [StrukturOrgController::class, 'update']);
     Route::post('/mitra-donatur/store', [AdminController::class, 'mitraStore']);
     Route::post('/mitra-donatur/update/{id_mitra}', [AdminController::class, 'mitraUpdate']);

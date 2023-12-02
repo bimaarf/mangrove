@@ -12,6 +12,17 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+    public function onload(Request $request)
+    {
+        $userTokens = $request->user()->tokens;
+
+        $hasToken = $userTokens->isNotEmpty();
+
+        return response()->json([
+            'has_token' => $hasToken,
+            'id_hash' => sha1('logged' . $userTokens),
+        ]);
+    }
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -34,23 +45,21 @@ class AuthController extends Controller
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                 ]);
-            $token = $user->createToken($user->email . '_Token')->plainTextToken;
-            return response()->json([
-                'status' => 200,
-                'id' => sha1('Marketplace-user->id' . $user->id),
-                'username' => $user->name,
-                'email' => $user->email,
-                'token' => $token,
-                'message' => 'Logged In Successfully!',
-            ]);
-
-        }
-        else{
-            return response()->json([
-                'status' => 201,
-                'validation_errors' => 'Password not match!',
-            ]);
-        }
+                $token = $user->createToken($user->email . '_Token')->plainTextToken;
+                return response()->json([
+                    'status' => 200,
+                    'id' => sha1('Marketplace-user->id' . $user->id),
+                    'username' => $user->name,
+                    'email' => $user->email,
+                    'token' => $token,
+                    'message' => 'Logged In Successfully!',
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 201,
+                    'validation_errors' => 'Password not match!',
+                ]);
+            }
         } catch (\Throwable $th) {
             if ($validator->fails()) {
                 return response()->json([
@@ -58,7 +67,6 @@ class AuthController extends Controller
                 ]);
             }
         }
-
     }
     public function login(Request $request)
     {
@@ -102,15 +110,14 @@ class AuthController extends Controller
             ]);
         }
     }
-    public function logout()
+    public function logout(Request $request)
     {
-        Auth::user()->tokens()->each(function ($token, $key) {
+        $request->user()->tokens()->each(function ($token, $key) {
             $token->delete();
         });
         return response()->json([
             'status' => 200,
             'message' => 'Logout successfully',
         ]);
-
     }
 }
