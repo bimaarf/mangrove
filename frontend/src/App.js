@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
+import "./App.css";
 import { About } from "./Pages/About";
 import { PageGallery } from "./Pages/Admin/_PageGallery";
 import { Gallery } from "./Pages/Gallery";
