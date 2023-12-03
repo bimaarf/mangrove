@@ -11,10 +11,9 @@ class StrukturOrgController extends Controller
     // Menampilkan semua data
     public function view()
     {
-        $strukturOrganisasi = StrukturOrganisasi::all();
+        $strukturOrganisasi = StrukturOrganisasi::firstOrFail();
         return response()->json($strukturOrganisasi);
     }
-
 
     public function update(Request $request)
     {
@@ -30,6 +29,8 @@ class StrukturOrgController extends Controller
             'desa_sungai_bakau_besar' => 'required',
             'desa_sungai_bakau_kecil' => 'required',
             'desa_sungai_purun_kecil' => 'required',
+        ], [
+            'required' => 'The :attribute field is required.',
         ]);
 
         $strukturOrganisasi = StrukturOrganisasi::first();

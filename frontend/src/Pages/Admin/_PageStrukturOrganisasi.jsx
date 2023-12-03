@@ -39,34 +39,28 @@ export const StrukturOrganisasi = () => {
       );
 
       setLoadSubmit(false);
-      if (res.data.status === 201) {
-        return toast.warning("Masukkan data dengan benar");
+      if (res.data.status === 200) {
+        toast.success("Berhasil diubah");
+        __GET__STR_API();
+      } else if (res.data.status === 422) {
+        // Validation errors
+        const errors = res.data.errors;
+        Object.keys(errors).forEach((field) => {
+          toast.warning(`${errors[field][0]}`);
+        });
+      } else {
+        toast.warning("Masukkan data dengan benar");
       }
-
-      toast.success("Berhasil diubah");
     } catch (error) {
       toast.error("Gagal mengirim data. Silakan coba lagi.");
       setLoadSubmit(false);
     }
   };
+
   const __GET__STR_API = async () => {
     try {
       const res = await axios.get("api/struktur-organisasi/view");
-      setFormInput(
-        res.data[0] || {
-          ketua: "",
-          sekretaris: "",
-          bendahara: "",
-          perencanaan_dan_program: "",
-          pendidikan_lingkungan_hidup: "",
-          pengembangan_usaha: "",
-          desa_pasir: "",
-          desa_penibung: "",
-          desa_sungai_bakau_besar: "",
-          desa_sungai_bakau_kecil: "",
-          desa_sungai_purun_kecil: "",
-        }
-      );
+      setFormInput(res.data);
     } catch (error) {
       console.error("Error fetching data:", error);
       // Set default values in case of an error
