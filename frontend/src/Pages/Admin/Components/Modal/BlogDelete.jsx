@@ -46,8 +46,11 @@ export const DeleteBlog = ({ getBlogAPI, item }) => {
               type="submit"
               onClick={handleSubmit}
               disabled={loadSubmit ? true : false}
-              className="bg-red-600 hover:bg-red-700 duration-200 text-md lg:text-xl rounded px-10 md:px-20 py-2 md:py-4">
-              Hapus
+              className="bg-red-600 flex items-center gap-1 hover:bg-red-700 duration-200 text-md lg:text-xl rounded px-10 md:px-20 py-2 md:py-4">
+              <span>Hapus</span>
+              {loadSubmit && (
+                <i className="fa-solid fa-spinner animate-spin"></i>
+              )}
             </button>
             <label
               htmlFor={`delete-blog${item.id}`}

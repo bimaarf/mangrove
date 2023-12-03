@@ -56,8 +56,11 @@ export const UpdateCategory = ({ getCategoryAPI, item }) => {
                 type="submit"
                 onClick={handleSubmit}
                 disabled={loadSubmit ? true : false}
-                className="bg-yellow-600 hover:bg-yellow-700 duration-200 rounded px-10 py-1.5">
-                Update
+                className="bg-yellow-600 flex items-center gap-1 hover:bg-yellow-700 duration-200 rounded px-10 py-1.5">
+                <span>Update</span>
+                {loadSubmit && (
+                  <i className="fa-solid fa-spinner animate-spin"></i>
+                )}
               </button>
               <label
                 htmlFor={`update-category${item.id}`}

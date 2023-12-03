@@ -1,5 +1,9 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import secureLocalStorage from "react-secure-storage";
+import { toast } from "react-toastify";
+import { LoadingScreen } from "../../../LoadingScreen";
 
 export const SidebarAdmin = () => {
   const location = useLocation();
@@ -36,8 +40,30 @@ export const SidebarAdmin = () => {
       url: "/administrator/kelola-pengunjung",
     },
   ];
+  const [loadSubmit, setLoadSubmit] = useState(false);
+  const handleLogout = async (e) => {
+    setLoadSubmit(true);
+    e.preventDefault();
+    await axios.get("sanctum/csrf-cookie").then(() => {
+      axios
+        .post("api/admin/logout")
+        .then((res) => {
+          setLoadSubmit(false);
+          navRedirect("/");
+          toast.success("Anda telah logout");
+          secureLocalStorage.clear();
+        })
+        .catch((err) => {
+          setLoadSubmit(false);
+          navRedirect("/");
+          toast.success("Anda telah logout");
+          secureLocalStorage.clear();
+        });
+    });
+  };
   return (
     <>
+      {loadSubmit && <LoadingScreen />}
       <div className="bg-white w-2/4 h-2/4 rounded-xl hidden md:block md:pb-10">
         <div
           className="bg-white rounded-3xl p-10 font-medium"
@@ -61,10 +87,13 @@ export const SidebarAdmin = () => {
               <h1 className="font-normal">{item.label}</h1>
             </div>
           ))}
-          <div className="flex gap-3 p-3 cursor-pointer text-xl mt-40 bg-red-500 hover:bg-red-600 text-white hover:text-white duration-200 ease-in-out rounded-xl justify-start items-center">
+          <button
+            onClick={handleLogout}
+            disabled={loadSubmit}
+            className="flex w-full glass gap-3 p-3 cursor-pointer text-xl mt-20 bg-red-600 hover:bg-red-700 text-white hover:text-white duration-200 ease-in-out rounded-xl justify-start items-center">
             <i className="fa fa-power-off"></i>
             <h1 className="font-normal -ml-1">Logout</h1>
-          </div>
+          </button>
         </div>
       </div>
       <div className="btm-nav md:hidden bg-white z-50 text-sm">

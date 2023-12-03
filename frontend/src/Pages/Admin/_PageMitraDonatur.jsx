@@ -6,6 +6,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { ModalMitraUpdate } from "./Components/Modal/MitraUpdate";
+import { Donatur } from "../Components/Modal/Donatur";
+import { LoadingScreen } from "../../LoadingScreen";
 
 export const MitraDonatur = () => {
   const [loadSubmit, setLoadSubmit] = useState(false);
@@ -74,6 +76,8 @@ export const MitraDonatur = () => {
         style={{
           backgroundImage: `url(${ImagesBg})`,
         }}></div>
+      <Donatur props={getMitra} />
+      {loadSubmit && <LoadingScreen />}
       <div className="bg-gray-200 bg-opacity-40">
         <div className="md:container md:mx-auto pb-10 md:pt-32 pt-36 mx-2">
           <div className="md:flex md:columns-2 md:gap-10 -mt-96">
@@ -82,7 +86,6 @@ export const MitraDonatur = () => {
               <h1 className="md:text-2xl text-xl font-bold text-gray-800">
                 Mitra
               </h1>
-
               <div className="md:flex justify-center items-center gap-1">
                 <div className="mt-2 md:w-1/3">
                   <label
@@ -129,7 +132,7 @@ export const MitraDonatur = () => {
                   />
                 </div>
               </div>
-              <div className="flex justify-end">
+              <div className="flex justify-end items-center gap-1">
                 <button
                   type="submit"
                   onClick={handleSubmit}
@@ -140,6 +143,11 @@ export const MitraDonatur = () => {
                     <i className="fa-solid fa-spinner animate-spin"></i>
                   )}
                 </button>
+                <label
+                  htmlFor="mitra"
+                  className="bg-yellow-600 cursor-pointer hover-bg-yellow-700 duration-200 text-sm text-white rounded px-4 py-2 mt-4">
+                  <span>Lihat</span>
+                </label>
               </div>
               <div className="overflow-x-auto">
                 <table className="table mt-4 border-t border-dashed w-full table-auto">

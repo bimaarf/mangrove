@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useCookies } from "react-cookie";
 import secureLocalStorage from "react-secure-storage";
 import validator from "validator";
+import { LoadingScreen } from "../LoadingScreen";
 
 export const Login = ({ setAuthCheck }) => {
   const navRedirect = useNavigate();
@@ -68,6 +69,7 @@ export const Login = ({ setAuthCheck }) => {
   return (
     <>
       <div style={{ backgroundImage: `url(${ImagesBg})` }}>
+        {loadSubmit && <LoadingScreen />}
         <div className="py-48 flex justify-center">
           <form className="shadow text-white rounded-xl bg-slate-800 bg-opacity-70 backdrop-filter backdrop-brightness-100 md:w-1/2 lg:w-2/5 w-full mx-2 px-4 py-10 md:px-14 md:py-20">
             <div className="text-4xl font-semibold text-center">

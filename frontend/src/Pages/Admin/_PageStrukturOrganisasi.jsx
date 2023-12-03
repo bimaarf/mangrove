@@ -4,6 +4,7 @@ import { Footer } from "../Components/_Footer";
 import { SidebarAdmin } from "./Components/_SidebarAdmin";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { LoadingScreen } from "../../LoadingScreen";
 export const StrukturOrganisasi = () => {
   const [loadSubmit, setLoadSubmit] = useState(false);
   const [formInput, setFormInput] = useState({
@@ -96,6 +97,7 @@ export const StrukturOrganisasi = () => {
         style={{
           backgroundImage: `url(${ImagesBg})`,
         }}></div>
+      {loadSubmit && <LoadingScreen />}
       <div className="bg-gray-200 bg-opacity-40">
         <div className="md:container md:mx-auto pb-10 md:pt-32 pt-36 mx-2">
           <div className="md:flex md:columns-2 md:gap-10 -mt-96">

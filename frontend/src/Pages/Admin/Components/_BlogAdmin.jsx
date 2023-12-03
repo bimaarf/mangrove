@@ -24,17 +24,21 @@ export const BlogAdmin = ({ getBlog, getCategory, getBlogAPI }) => {
               <tr>
                 <td>{key + 1}</td>
                 <td>
-                  <img
-                    className="rounded object-cover shadow p-0.5 border"
-                    width={100}
-                    height={70}
-                    src={
-                      process.env.REACT_APP_API +
-                      "Images/Blog/" +
-                      JSON.parse(item.image)[0]
-                    }
-                    alt=""
-                  />
+                  {item.image ? (
+                    <img
+                      className="rounded object-cover shadow p-0.5 border"
+                      width={100}
+                      height={70}
+                      src={
+                        process.env.REACT_APP_API +
+                        "Images/Blog/" +
+                        JSON.parse(item.image)[0]
+                      }
+                      alt=""
+                    />
+                  ) : (
+                    <p className="text-graya-700">Tidak ada</p>
+                  )}
                 </td>
                 <td className="whitespace-pre-wrap max-w-md">
                   {item.title.length > 50

@@ -191,7 +191,7 @@ class AdminController extends Controller
             'title' => 'required',
             'body' => 'required',
             'category_id' => 'required',
-            'image.*' => 'required|image|mimes:jpeg,jpg,png,webp',
+            'image.*' => 'nullable|image|mimes:jpeg,jpg,png,webp',
         ]);
 
         try {
@@ -202,29 +202,24 @@ class AdminController extends Controller
                     'message' => 'title must be unique'
                 ]);
             }
+            $__blog                     = new Blog();
+            $__blog->title              = $request->title;
+            $__blog->slug               = Str::slug($request->title);
+            $__blog->body               = $request->body;
+            $__blog->category_id        = $request->category_id;
             if ($request->hasFile('image')) {
-                $__blog                     = new Blog();
-                $__blog->title              = $request->title;
-                $__blog->slug               = Str::slug($request->title);
-                $__blog->body               = $request->body;
-                $__blog->category_id        = $request->category_id;
                 foreach ($request->file('image') as $file) {
                     $filename = time() . '-' . $file->getClientOriginalName();
                     $file->move(public_path('Images/Blog'), $filename);
                     $data[] = $filename;
                 }
                 $__blog->image = json_encode($data);
-                $__blog->save();
-                return response()->json([
-                    'status' => 200,
-                    'messages' => 'success',
-                ]);
-            } else {
-                return response()->json([
-                    'status' => 203,
-                    'messages' => 'image required',
-                ]);
             }
+            $__blog->save();
+            return response()->json([
+                'status' => 200,
+                'messages' => 'success',
+            ]);
         } catch (\Throwable $th) {
             if ($validator->fails()) {
                 return response()->json([

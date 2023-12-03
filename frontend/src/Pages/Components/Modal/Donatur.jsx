@@ -5,8 +5,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 
-export const Donatur = () => {
-  const [getMitra, setMitra] = useState("");
+export const Donatur = ({ props }) => {
+  const [getMitra, setMitra] = useState(props ? props : "");
   const __GET_MITRA_API = () => {
     axios.get("api/mitra-donatur/view").then((res) => setMitra(res.data));
   };
@@ -18,11 +18,9 @@ export const Donatur = () => {
       <input type="checkbox" id="mitra" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box w-11/12 max-w-5xl bg-opacity-70 backdrop-filter backdrop-brightness-100 bg-gray-900 text-white">
-          <h1 className="text-center font-semibold text-2xl mt-6 mb-10">
-            Mitra / Donatur
-          </h1>
+          <h1 className="text-center font-semibold ">Mitra / Donatur</h1>
           <div className="flex justify-center">
-            <table className="table mt-4 border-t border-dashed w-full table-auto">
+            <table className="table w-full table-auto">
               <thead>
                 <tr>
                   <th>#</th>

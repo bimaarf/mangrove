@@ -52,8 +52,11 @@ export const AddCategory = ({ getCategoryAPI }) => {
                 type="submit"
                 onClick={handleSubmit}
                 disabled={loadSubmit ? true : false}
-                className="bg-cyan-600 hover:bg-cyan-700 duration-200 rounded px-10 py-1.5">
-                Tambah
+                className="bg-cyan-600 flex items-center gap-1 hover:bg-cyan-700 duration-200 rounded px-10 py-1.5">
+                <span>Tambah</span>
+                {loadSubmit && (
+                  <i className="fa-solid fa-spinner animate-spin"></i>
+                )}
               </button>
               <label
                 htmlFor={`add-category`}

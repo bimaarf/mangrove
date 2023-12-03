@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import ImageLogo from "../../Images/logo-122x140.png";
-import { useNavigate } from "react-router-dom";
-import { MapLocation } from "./Modal/MapLocation";
-import { JumlahMangrove } from "./Modal/JumlahMangrove";
-import { Donatur } from "./Modal/Donatur";
-import secureLocalStorage from "react-secure-storage";
-import { useCookies } from "react-cookie";
 import axios from "axios";
+import React, { useState } from "react";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
+import secureLocalStorage from "react-secure-storage";
 import { toast } from "react-toastify";
+import ImageLogo from "../../Images/logo-122x140.png";
+import { Donatur } from "./Modal/Donatur";
+import { JumlahMangrove } from "./Modal/JumlahMangrove";
+import { JumlahPengunjung } from "./Modal/JumlahPengunjung";
 export const Headers = ({ setAuthCheck, authCheck }) => {
   const navRedirect = useNavigate();
   const [dropdown, setDropdown] = useState(false);
@@ -39,7 +39,7 @@ export const Headers = ({ setAuthCheck, authCheck }) => {
   };
   return (
     <>
-      <MapLocation />
+      <JumlahPengunjung />
       <JumlahMangrove />
       <Donatur />
       <div className="lg:flex justify-between items-center bg-black bg-opacity-60 backdrop-filter backdrop-blur-lg border-b fixed w-full z-50 md:px-10 px-2 py-2">
@@ -69,10 +69,10 @@ export const Headers = ({ setAuthCheck, authCheck }) => {
             <span>Beranda</span>
           </div>
           <label
-            htmlFor="my_modal_6"
+            htmlFor="jumlah-pengunjung"
             className="flex text-white cursor-pointer border py-1 px-2 whitespace-nowrap md:px-4 rounded hover:md:px-5 hover:text-gray-300 text-xs md:text-xl duration-200 justify-center items-center gap-1">
-            <i className="fa fa-map-marker"></i>
-            <span>Lokasi Tanam</span>
+            <i className="fa-solid fa-person-hiking"></i>
+            <span>Jumlah Pengunjung</span>
           </label>
           <div
             onClick={() => {

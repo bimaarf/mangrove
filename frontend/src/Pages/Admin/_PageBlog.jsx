@@ -10,6 +10,7 @@ import { AddCategory } from "./Components/Modal/CategoryAdd";
 import { UpdateCategory } from "./Components/Modal/CategoryUpdate";
 import { DeleteCategory } from "./Components/Modal/CategoryDelete";
 import { BlogAdmin } from "./Components/_BlogAdmin";
+import { LoadingScreen } from "../../LoadingScreen";
 
 export const PageBlog = () => {
   const [imageFormat, setImageFormat] = useState([]);
@@ -61,13 +62,16 @@ export const PageBlog = () => {
   const handleSubmit = async (e) => {
     setLoadSubmit(true);
     e.preventDefault();
+    console.log(imageFormat.length);
     const pushServer = new FormData();
     pushServer.append("title", formInput.title);
     pushServer.append("body", formInput.body);
     pushServer.append("category_id", formInput.category_id);
-    imageFormat.forEach((file) => {
-      pushServer.append("image[]", file.fileName);
-    });
+    if (imageFormat.length > 0) {
+      imageFormat.forEach((file) => {
+        pushServer.append("image[]", file.fileName);
+      });
+    }
     const data = pushServer;
     const config = {
       headers: {
@@ -79,7 +83,6 @@ export const PageBlog = () => {
         setLoadSubmit(false);
         if (res.data.status === 101)
           return toast.warning("Judul postingan sudah ada");
-        if (res.data.status === 203) return toast.warning("Masukkan gambar");
         if (res.data.status === 202)
           return toast.warning("Masukkan data dengan benar");
         toast.success("Berhasil ditambahkan");
@@ -112,6 +115,7 @@ export const PageBlog = () => {
         style={{
           backgroundImage: `url(${ImagesBg})`,
         }}></div>
+      {loadSubmit && <LoadingScreen />}
       <div className="bg-gray-200 bg-opacity-40">
         <div className="md:container md:mx-auto pb-10 md:pt-32 pt-36 mx-2">
           <div className="md:flex md:columns-2 md:gap-10 -mt-96">

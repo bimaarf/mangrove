@@ -31,15 +31,17 @@ export const Blog = () => {
                 <div
                   key={key}
                   onClick={() => navRedirect(`/blog/v/:${item.slug}`)}
-                  className="bg-white md:p-10 p-6 text-center mt-4 cursor-pointer hover:bg-gray-200 hover:bg-opacity-90 duration-300">
-                  <img
-                    src={
-                      process.env.REACT_APP_API +
-                      "Images/Blog/" +
-                      JSON.parse(item.image)[0]
-                    }
-                    alt=""
-                  />
+                  className="bg-white md:p-10 p-6 text-center mt-4 cursor-pointer hover:bg-gray-200 bg-opacity-90 hover:bg-opacity-100 duration-300">
+                  {item.image && (
+                    <img
+                      src={
+                        process.env.REACT_APP_API +
+                        "Images/Blog/" +
+                        JSON.parse(item.image)[0]
+                      }
+                      alt=""
+                    />
+                  )}
                   <Link
                     to={`/blog/v/:${item.slug}`}
                     className="font-bold text-gray-800 text-md hover:text-orange-600 duration-200 lg:text-xl my-3">

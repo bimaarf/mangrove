@@ -40,88 +40,100 @@ export const About = () => {
           <h1 className="text-center my-4 font-bold text-lg">
             Struktur Organisasi
           </h1>
-          <div className="divider"></div>
-          <div className="flex flex-col w-full scale-75">
-            <div className="grid h-20 card bg-base-300 rounded-box place-items-center">
-              <p className="font-bold">Ketua</p>
-              <p className="font-medium">{strukturOrganisasi.ketua}</p>
+          {strukturOrganisasi ? (
+            <div className="container mx-auto">
+              <div className="divider"></div>
+              <div className="flex flex-col w-full scale-75 xl:scale-100">
+                <div className="grid h-20 card bg-base-300 rounded-box place-items-center">
+                  <p className="font-bold">Ketua</p>
+                  <p className="font-medium">{strukturOrganisasi.ketua}</p>
+                </div>
+                <div className="divider"></div>
+              </div>
+              <div className="flex w-full scale-75 xl:scale-100">
+                <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
+                  <p className="font-bold">Sekretaris</p>
+                  <p className="font-medium">{strukturOrganisasi.sekretaris}</p>
+                </div>
+                <div className="divider divider-horizontal">-</div>
+                <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
+                  <p className="font-bold">Bendahara</p>
+                  <p className="font-medium">{strukturOrganisasi.bendahara}</p>
+                </div>
+              </div>
+              <h1 className="text-center my-4 font-bold text-lg">
+                Koordinator Bidang
+              </h1>
+              <div className="divider"></div>
+              <div className="flex w-full scale-75 xl:scale-100">
+                <div className="grid h-60 p-4 text-center flex-grow card bg-base-300 rounded-box place-items-center">
+                  <p className="font-bold">
+                    Koord. Bidang Perencanaan Dan Program
+                  </p>
+                  <p className="font-medium">
+                    {strukturOrganisasi.perencanaan_dan_program}
+                  </p>
+                </div>
+                <div className="divider divider-horizontal">-</div>
+                <div className="grid h-60 p-4 text-center flex-grow card bg-base-300 rounded-box place-items-center">
+                  <p className="font-bold">Koord. Bidang Lingkungan Hidup</p>
+                  <p className="font-medium">
+                    {strukturOrganisasi.pendidikan_lingkungan_hidup}
+                  </p>
+                </div>
+                <div className="divider divider-horizontal">-</div>
+                <div className="grid h-60 p-4 text-center flex-grow card bg-base-300 rounded-box place-items-center">
+                  <p className="font-bold">Koord. Bidang Pengembangan Usaha</p>
+                  <p className="font-medium">
+                    {strukturOrganisasi.pengembangan_usaha}
+                  </p>
+                </div>
+              </div>
+              <h1 className="text-center my-4 font-bold text-lg">
+                Koordinator Lapangan
+              </h1>
+              <div className="flex w-full scale-75 xl:scale-100">
+                <div className="grid h-60 p-4 text-center flex-grow card bg-base-300 rounded-box place-items-center">
+                  <p className="font-bold">Daerah Desa Pasir</p>
+                  <p className="font-medium">{strukturOrganisasi.desa_pasir}</p>
+                </div>
+                <div className="divider divider-horizontal">-</div>
+                <div className="grid h-60 p-4 text-center flex-grow card bg-base-300 rounded-box place-items-center">
+                  <p className="font-bold">Daerah Desa Penibung</p>
+                  <p className="font-medium">
+                    {strukturOrganisasi.desa_penibung}
+                  </p>
+                </div>
+              </div>
+              <div className="flex w-full scale-75 xl:scale-100">
+                <div className="grid h-60 p-4 text-center flex-grow card bg-base-300 rounded-box place-items-center">
+                  <p className="font-bold">Daerah Desa Sungai Bakau Besar</p>
+                  <p className="font-medium">
+                    {strukturOrganisasi.desa_sungai_bakau_besar}
+                  </p>
+                </div>
+                <div className="divider divider-horizontal">-</div>
+                <div className="grid h-60 p-4 text-center flex-grow card bg-base-300 rounded-box place-items-center">
+                  <p className="font-bold">Daerah Desa Sungai Bakau Kecil</p>
+                  <p className="font-medium">
+                    {strukturOrganisasi.desa_sungai_bakau_kecil}
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col w-full scale-75 xl:scale-100">
+                <div className="grid h-20 card bg-base-300 rounded-box place-items-center">
+                  <p className="font-bold">Daerah Desa Purun Kecil</p>
+                  <p className="font-medium">
+                    {strukturOrganisasi.desa_sungai_purun_kecil}
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className="divider"></div>
-          </div>
-          <div className="flex w-full scale-75">
-            <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
-              <p className="font-bold">Sekretaris</p>
-              <p className="font-medium">{strukturOrganisasi.sekretaris}</p>
-            </div>
-            <div className="divider divider-horizontal">-</div>
-            <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
-              <p className="font-bold">Bendahara</p>
-              <p className="font-medium">{strukturOrganisasi.bendahara}</p>
-            </div>
-          </div>
-          <h1 className="text-center my-4 font-bold text-lg">
-            Koordinator Bidang
-          </h1>
-          <div className="divider"></div>
-          <div className="flex w-full scale-75">
-            <div className="grid h-60 p-4 text-center flex-grow card bg-base-300 rounded-box place-items-center">
-              <p className="font-bold">Koord. Bidang Perencanaan Dan Program</p>
-              <p className="font-medium">
-                {strukturOrganisasi.perencanaan_dan_program}
-              </p>
-            </div>
-            <div className="divider divider-horizontal">-</div>
-            <div className="grid h-60 p-4 text-center flex-grow card bg-base-300 rounded-box place-items-center">
-              <p className="font-bold">Koord. Bidang Lingkungan Hidup</p>
-              <p className="font-medium">
-                {strukturOrganisasi.pendidikan_lingkungan_hidup}
-              </p>
-            </div>
-            <div className="divider divider-horizontal">-</div>
-            <div className="grid h-60 p-4 text-center flex-grow card bg-base-300 rounded-box place-items-center">
-              <p className="font-bold">Koord. Bidang Pengembangan Usaha</p>
-              <p className="font-medium">
-                {strukturOrganisasi.pengembangan_usaha}
-              </p>
-            </div>
-          </div>
-          <h1 className="text-center my-4 font-bold text-lg">
-            Koordinator Lapangan
-          </h1>
-          <div className="flex w-full scale-75">
-            <div className="grid h-60 p-4 text-center flex-grow card bg-base-300 rounded-box place-items-center">
-              <p className="font-bold">Daerah Desa Pasir</p>
-              <p className="font-medium">{strukturOrganisasi.desa_pasir}</p>
-            </div>
-            <div className="divider divider-horizontal">-</div>
-            <div className="grid h-60 p-4 text-center flex-grow card bg-base-300 rounded-box place-items-center">
-              <p className="font-bold">Daerah Desa Penibung</p>
-              <p className="font-medium">{strukturOrganisasi.desa_penibung}</p>
-            </div>
-          </div>
-          <div className="flex w-full scale-75">
-            <div className="grid h-60 p-4 text-center flex-grow card bg-base-300 rounded-box place-items-center">
-              <p className="font-bold">Daerah Desa Sungai Bakau Besar</p>
-              <p className="font-medium">
-                {strukturOrganisasi.desa_sungai_bakau_besar}
-              </p>
-            </div>
-            <div className="divider divider-horizontal">-</div>
-            <div className="grid h-60 p-4 text-center flex-grow card bg-base-300 rounded-box place-items-center">
-              <p className="font-bold">Daerah Desa Sungai Bakau Kecil</p>
-              <p className="font-medium">
-                {strukturOrganisasi.desa_sungai_bakau_kecil}
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col w-full scale-75">
-            <div className="grid h-20 card bg-base-300 rounded-box place-items-center">
-              <p className="font-bold">Daerah Desa Purun Kecil</p>
-              <p className="font-medium">
-                {strukturOrganisasi.desa_sungai_purun_kecil}
-              </p>
-            </div>
-          </div>
+          ) : (
+            <p className="text-center p-4 mb-4 font-medium text-gray-700 border rounded">
+              Struktur Organisasi belum ditambahkan
+            </p>
+          )}
         </div>
       </div>
       <div className="bg-gray-100  flex justify-center p-10">
