@@ -18,6 +18,20 @@ class StrukturOrgController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'ketua' => 'required',
+            'sekretaris' => 'required',
+            'bendahara' => 'required',
+            'perencanaan_dan_program' => 'required',
+            'pendidikan_lingkungan_hidup' => 'required',
+            'pengembangan_usaha' => 'required',
+            'desa_pasir' => 'required',
+            'desa_penibung' => 'required',
+            'desa_sungai_bakau_besar' => 'required',
+            'desa_sungai_bakau_kecil' => 'required',
+            'desa_sungai_purun_kecil' => 'required',
+        ]);
+
         $strukturOrganisasi = StrukturOrganisasi::first();
 
         if (!$strukturOrganisasi) {

@@ -40,7 +40,7 @@ export const StrukturOrganisasi = () => {
 
       setLoadSubmit(false);
       if (res.data.status === 201) {
-        return toast.warning("server error");
+        return toast.warning("Masukkan data dengan benar");
       }
 
       toast.success("Berhasil diubah");
