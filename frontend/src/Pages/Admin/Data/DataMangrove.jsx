@@ -1,29 +1,38 @@
 import React, { useState, useContext, useEffect } from "react";
 import CanvasJSReact from "@canvasjs/react-charts";
 import axios from "axios";
+
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-// Membuat konteks
+// Create context
 const MangroveContext = React.createContext();
 
 export function MangroveProvider({ children }) {
   const [getMangrove, setMangrove] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const updateMangrove = (newData) => {
     setMangrove(newData);
+    setLoading(false);
   };
 
   useEffect(() => {
-    // Panggil data Mangrove saat komponen dimuat
-    axios.get("api/mangrove/view").then((res) => {
-      updateMangrove(res.data);
-      setLoading(false);
-    });
+    // Fetch data Mangrove when the component is mounted
+    axios
+      .get("api/mangrove/view")
+      .then((res) => {
+        updateMangrove(res.data);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
   }, []); // Empty dependency array ensures this effect runs once
 
   return (
-    <MangroveContext.Provider value={{ getMangrove, updateMangrove, loading }}>
+    <MangroveContext.Provider
+      value={{ getMangrove, updateMangrove, loading, error }}>
       {children}
     </MangroveContext.Provider>
   );
@@ -34,7 +43,7 @@ export function useMangrove() {
 }
 
 export const DataMangrove = () => {
-  const { getMangrove, updateMangrove, loading } = useMangrove();
+  const { getMangrove, updateMangrove, loading, error } = useMangrove();
 
   const options = {
     title: {
@@ -48,24 +57,26 @@ export const DataMangrove = () => {
     ],
   };
 
-  const __Get_Mangrove_API = () => {
-    // Reload data Mangrove
-    axios.get("api/mangrove/view").then((res) => {
-      updateMangrove(res.data);
-    });
+  const reloadMangroveData = () => {
+    // Reload Mangrove data
+    axios
+      .get("api/mangrove/view")
+      .then((res) => {
+        updateMangrove(res.data);
+      })
+      .catch((err) => {
+        console.error("Error reloading data:", err);
+      });
   };
-
-  if (loading) {
-    return <p>Loading...</p>; // Tampilkan pesan loading saat data sedang diambil
-  }
 
   return (
     <div>
       <CanvasJSChart options={options} />
-      <div className="flex justify-center">
+      {error && <p style={{ color: "red" }}>Error: {error}</p>}
+      <div className="flex justify-center mt-4">
         <button
-          className="bg-orange-500 rounded text-white px-4 py-1 animate-pulse text-xs"
-          onClick={__Get_Mangrove_API}>
+          className="bg-orange-500 rounded text-white px-4 py-2 hover:bg-orange-600"
+          onClick={reloadMangroveData}>
           Reload Data
         </button>
       </div>
