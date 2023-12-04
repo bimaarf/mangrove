@@ -56,6 +56,25 @@ export const StrukturOrganisasi = () => {
       setLoadSubmit(false);
     }
   };
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    setLoadSubmit(true);
+    try {
+      await axios.get("sanctum/csrf-cookie");
+      const res = await axios.post("api/admin/struktur-organisasi/delete");
+
+      setLoadSubmit(false);
+      if (res.data.status === 201) {
+        toast.warning("Tidak ada data yg dihapus");
+      } else if (res.data.status === 200) {
+        toast.success("Berhasil dihapus");
+        __GET__STR_API();
+      }
+    } catch (error) {
+      toast.error("Gagal menghapus data. Silakan coba lagi.");
+      setLoadSubmit(false);
+    }
+  };
 
   const __GET__STR_API = async () => {
     try {
@@ -271,12 +290,24 @@ export const StrukturOrganisasi = () => {
                 />
               </div>
 
-              <div className="flex justify-end">
+              <div className="flex justify-end items-center gap-1">
+                <button
+                  type="button"
+                  onClick={handleDelete}
+                  disabled={loadSubmit}
+                  className="bg-red-600 hover-bg-red-700 duration-200 text-sm text-white rounded px-6 py-3 mt-4 flex items-center gap-1">
+                  <span>Hapus</span>
+                  {loadSubmit ? (
+                    <i className="fa-solid fa-spinner animate-spin"></i>
+                  ) : (
+                    <i className="fa-solid fa-trash"></i>
+                  )}
+                </button>
                 <button
                   type="submit"
                   onClick={handleSubmit}
                   disabled={loadSubmit}
-                  className="bg-cyan-600 hover-bg-cyan-700 duration-200 text-sm text-white rounded px-4 py-1 mt-4 flex items-center gap-1">
+                  className="bg-cyan-600 hover-bg-cyan-700 duration-200 text-sm text-white rounded px-6 py-3 mt-4 flex items-center gap-1">
                   <span>Submit</span>
                   {loadSubmit && (
                     <i className="fa-solid fa-spinner animate-spin"></i>

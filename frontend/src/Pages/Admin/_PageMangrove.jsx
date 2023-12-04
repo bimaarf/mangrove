@@ -98,11 +98,17 @@ export const PageMangrove = () => {
                   />
                 </div>
               </div>
-              <div className="flex justify-end mt-6">
+              <div className="flex justify-end items-center gap-1 mt-6">
+                <label
+                  htmlFor="jumlah-mangrove"
+                  className="flex justify-center cursor-pointer items-baseline gap-1 bg-sky-600 hover:bg-sky-700 text-white py-2 px-4 text-sm rounded-md">
+                  <i className="fa-solid fa-chart-simple"></i>
+                  <span>Lihat Chart</span>
+                </label>
                 <button
                   disabled={loadSubmit ? true : false}
                   onClick={handleSubmit}
-                  className="flex justify-center items-center gap-1 bg-teal-600 hover:bg-teal-700 text-white py-2 px-4 text-sm rounded-md">
+                  className="flex justify-center items-baseline gap-1 bg-teal-600 hover:bg-teal-700 text-white py-2 px-4 text-sm rounded-md">
                   <span>Tambahkan</span>
                   {loadSubmit ? (
                     <i className="fa-solid fa-spinner animate-spin"></i>

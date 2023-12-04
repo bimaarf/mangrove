@@ -14,7 +14,16 @@ class StrukturOrgController extends Controller
         $strukturOrganisasi = StrukturOrganisasi::firstOrFail();
         return response()->json($strukturOrganisasi);
     }
-
+    public function delete()
+    {
+        try {
+            $__struktur = StrukturOrganisasi::firstOrFail();
+            $__struktur->delete();
+            return response()->json(['status' => 200]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 201]);
+        }
+    }
     public function update(Request $request)
     {
         $request->validate([

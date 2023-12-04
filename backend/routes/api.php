@@ -31,6 +31,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum']], function (
     Route::post('/onload', [AuthController::class, 'onload']);
 
     Route::post('/struktur-organisasi/update', [StrukturOrgController::class, 'update']);
+    Route::post('/struktur-organisasi/delete', [StrukturOrgController::class, 'delete']);
     Route::post('/mitra-donatur/store', [AdminController::class, 'mitraStore']);
     Route::post('/mitra-donatur/update/{id_mitra}', [AdminController::class, 'mitraUpdate']);
     Route::post('/mitra-donatur/delete/{id_mitra}', [AdminController::class, 'mitraDelete']);
