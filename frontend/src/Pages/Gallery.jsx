@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import ImagesBg from "../Images/bg-home.jpg";
 import ImgSlider1 from "../Images/img-slider-1.jpg";
 import { Footer } from "./Components/_Footer";
+import { PreviewGalleryImg } from "./Components/Modal/PreviewGalleryImg";
 export const Gallery = () => {
   const [getGallery, setGallery] = useState("");
   const getGalleryAPI = async () => {
@@ -27,6 +28,11 @@ export const Gallery = () => {
             {getGallery &&
               getGallery.map((item, key) => (
                 <div
+                  onClick={() =>
+                    document
+                      .getElementById(`preview-img-${item.id}`)
+                      .showModal()
+                  }
                   key={key}
                   className="flex cursor-zoom-in md:w-1/4 w-full m-4 md:m-0 flex-wrap">
                   <div className="w-full relative overflow-hidden bg-cover bg-no-repeat">
@@ -40,6 +46,7 @@ export const Gallery = () => {
                       }
                     />
                   </div>
+                  <PreviewGalleryImg item={item} />
                 </div>
               ))}
           </div>

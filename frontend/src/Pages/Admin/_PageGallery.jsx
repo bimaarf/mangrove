@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ImageModal } from "./Components/Modal/Image";
+import { LoadingScreen } from "../../LoadingScreen";
 
 export const PageGallery = () => {
   const [imageFormat, setImageFormat] = useState([]);
@@ -80,6 +81,7 @@ export const PageGallery = () => {
         style={{
           backgroundImage: `url(${ImagesBg})`,
         }}></div>
+      {loadSubmit && <LoadingScreen />}
       <div className="bg-gray-200 bg-opacity-40">
         <div className="md:container md:mx-auto pb-10 md:pt-32 pt-36 mx-2">
           <div className="md:flex md:columns-2 md:gap-10 -mt-96">
@@ -140,8 +142,11 @@ export const PageGallery = () => {
               <button
                 onClick={handleSubmit}
                 disabled={loadSubmit ? true : false}
-                className="bg-green-600 hover:bg-green-700 duration-200 px-10 py-1 text-white rounded w-1/3 float-right">
-                Upload
+                className="bg-green-600 flex justify-center items-center gap-1 hover:bg-green-700 duration-200 px-10 py-1 text-white rounded w-1/3 float-right">
+                <span>Upload</span>
+                {loadSubmit && (
+                  <i className="fa-solid fa-spinner animate-spin"></i>
+                )}
               </button>
               <div className="grid md:grid-cols-4 grid-cols-2 gap-1 mt-20">
                 {getGallery &&
