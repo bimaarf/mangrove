@@ -37,6 +37,7 @@ export const Gallery = () => {
                   className="flex cursor-zoom-in md:w-1/4 w-full m-4 md:m-0 flex-wrap">
                   <div className="w-full relative overflow-hidden bg-cover bg-no-repeat">
                     <img
+                      loading="lazy"
                       alt="gallery"
                       className="block h-full w-full object-cover object-center transition duration-300 ease-in-out hover:scale-110 shadow-md"
                       src={
