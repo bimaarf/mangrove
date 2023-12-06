@@ -13,7 +13,7 @@ export const About = () => {
   useEffect(() => {
     // Ambil data Struktur Organisasi dari API
     axios.get("api/struktur-organisasi/view").then((response) => {
-      setStrukturOrganisasi(response.data[0]);
+      setStrukturOrganisasi(response.data);
     });
   }, []);
 
@@ -43,14 +43,14 @@ export const About = () => {
           {strukturOrganisasi ? (
             <div className="container mx-auto">
               <div className="divider"></div>
-              <div className="flex flex-col w-full scale-75 xl:scale-100">
+              <div className="flex flex-col w-full scale-75">
                 <div className="grid h-20 card bg-base-300 rounded-box place-items-center">
                   <p className="font-bold">Ketua</p>
                   <p className="font-medium">{strukturOrganisasi.ketua}</p>
                 </div>
                 <div className="divider"></div>
               </div>
-              <div className="flex w-full scale-75 xl:scale-100">
+              <div className="flex w-full scale-75">
                 <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
                   <p className="font-bold">Sekretaris</p>
                   <p className="font-medium">{strukturOrganisasi.sekretaris}</p>
@@ -65,7 +65,7 @@ export const About = () => {
                 Koordinator Bidang
               </h1>
               <div className="divider"></div>
-              <div className="flex w-full scale-75 xl:scale-100">
+              <div className="flex w-full scale-75">
                 <div className="grid h-60 p-4 text-center flex-grow card bg-base-300 rounded-box place-items-center">
                   <p className="font-bold">
                     Koord. Bidang Perencanaan Dan Program
@@ -92,7 +92,7 @@ export const About = () => {
               <h1 className="text-center my-4 font-bold text-lg">
                 Koordinator Lapangan
               </h1>
-              <div className="flex w-full scale-75 xl:scale-100">
+              <div className="flex w-full scale-75">
                 <div className="grid h-60 p-4 text-center flex-grow card bg-base-300 rounded-box place-items-center">
                   <p className="font-bold">Daerah Desa Pasir</p>
                   <p className="font-medium">{strukturOrganisasi.desa_pasir}</p>
@@ -105,7 +105,7 @@ export const About = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex w-full scale-75 xl:scale-100">
+              <div className="flex w-full scale-75">
                 <div className="grid h-60 p-4 text-center flex-grow card bg-base-300 rounded-box place-items-center">
                   <p className="font-bold">Daerah Desa Sungai Bakau Besar</p>
                   <p className="font-medium">
@@ -120,7 +120,7 @@ export const About = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col w-full scale-75 xl:scale-100">
+              <div className="flex flex-col w-full scale-75">
                 <div className="grid h-20 card bg-base-300 rounded-box place-items-center">
                   <p className="font-bold">Daerah Desa Purun Kecil</p>
                   <p className="font-medium">

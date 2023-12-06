@@ -9,12 +9,12 @@ use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
-    function showGalleryImage()
+    public function showGalleryImage()
     {
         $__gallery = Gallery::all();
         return $__gallery;
     }
-    function blogGet(Request $request)
+    public function blogGet(Request $request)
     {
         if ($request->has('slug')) {
             $__blog         = Blog::join('tb_category', 'tb_category.id', 'tb_blog.category_id')
@@ -27,8 +27,15 @@ class SiteController extends Controller
             return $__blog;
         }
     }
-    function mangroveGet()
+    public function mangroveGet()
     {
-        return Mangrove::all();
+        $mangroveData = Mangrove::all();
+
+        // Convert "y" values to integers
+        foreach ($mangroveData as $item) {
+            $item->y = (int)$item->y;
+        }
+
+        return response()->json($mangroveData);
     }
 }

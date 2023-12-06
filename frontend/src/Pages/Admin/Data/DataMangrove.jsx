@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import CanvasJSReact from "@canvasjs/react-charts";
-import axios from "axios";
 
+import axios from "axios";
+var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 // Create context
