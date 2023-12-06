@@ -11,7 +11,7 @@ use App\Models\Pengunjung;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-
+use Intervention\Image\Facades\Image;
 class AdminController extends Controller
 {
     public function mitraGet()
@@ -320,37 +320,68 @@ class AdminController extends Controller
             ]);
         }
     }
-    function galleryStore(Request $request)
+    public function galleryStore(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'image.*' => 'required|image|mimes:jpeg,jpg,png,webp',
         ]);
+
         try {
-            if ($request->hasFile('image')) {
-                foreach ($request->file('image') as $file) {
-                    $__gallery = new Gallery();
-                    $filename = time() . '-' . $file->getClientOriginalName();
-                    $file->move(public_path('Images/Gallery'), $filename);
-                    $__gallery->image = $filename;
-                    $__gallery->save();
-                }
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'success'
-                ]);
-            } {
-                return response()->json([
-                    'status' => 203,
-                    'message' => 'required'
-                ]);
-            }
-        } catch (\Throwable $th) {
             if ($validator->fails()) {
                 return response()->json([
                     'status' => 202,
-                    'message' => 'Validator error'
+                    'message' => 'Validator error',
                 ]);
             }
+
+            if ($request->hasFile('image')) {
+                foreach ($request->file('image') as $file) {
+                    // Create a new Intervention Image instance
+                    $image = Image::make($file);
+
+                    // Resize the image to a maximum of 300 KB
+                    $image->resize(1024, 768); // Adjust the dimensions as needed
+
+                    // Get the file size in KB
+                    $fileSize = $image->filesize() / 1024;
+
+                    // Check if the image exceeds 300 KB
+                    if ($fileSize > 300) {
+                        // Save the resized image
+                        $filename = time() . '-' . $file->getClientOriginalName();
+                        $image->save(public_path('Images/Gallery') . '/' . $filename);
+
+                        // Save the record in the database
+                        $gallery = new Gallery();
+                        $gallery->image = $filename;
+                        $gallery->save();
+                    } else {
+                        // If the image is already within the size limit, save it as is
+                        $filename = time() . '-' . $file->getClientOriginalName();
+                        $file->move(public_path('Images/Gallery'), $filename);
+
+                        // Save the record in the database
+                        $gallery = new Gallery();
+                        $gallery->image = $filename;
+                        $gallery->save();
+                    }
+                }
+
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'success',
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 203,
+                    'message' => 'required',
+                ]);
+            }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 500,
+                'message' => $th->getMessage(),
+            ]);
         }
     }
 }
