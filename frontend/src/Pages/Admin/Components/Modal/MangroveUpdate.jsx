@@ -4,7 +4,11 @@ import { toast } from "react-toastify";
 
 export const UpdateMangrove = ({ getMangroveAPI, item }) => {
   const [loadSubmit, setLoadSubmit] = useState(false);
-  const [formInput, setFormInput] = useState({ label: item.label, y: item.y });
+  const [formInput, setFormInput] = useState({
+    label: item.label,
+    y: item.y,
+    tahun: item.tahun,
+  });
   const handleChange = (e) => {
     e.persist();
     setFormInput({ ...formInput, [e.target.name]: e.target.value });
@@ -24,7 +28,7 @@ export const UpdateMangrove = ({ getMangroveAPI, item }) => {
         })
         .catch(() => {
           setLoadSubmit(false);
-    toast.error("Server Error");
+          toast.error("Server Error");
         });
     });
   };
@@ -43,7 +47,7 @@ export const UpdateMangrove = ({ getMangroveAPI, item }) => {
           <div className="lg:flex justify-start items-center gap-1">
             <div className="mt-4  w-full lg:w-2/3">
               <label htmlFor="label" className="font-medium">
-                Label
+                Tempat
               </label>
               <input
                 onChange={handleChange}
@@ -62,10 +66,24 @@ export const UpdateMangrove = ({ getMangroveAPI, item }) => {
               <input
                 onChange={handleChange}
                 value={formInput.y}
-                type="text"
+                type="number"
                 name="y"
                 id="y"
                 placeholder="Masukkan Jumlah..."
+                className="outline-none border px-2 py-3 text-gray-100 bg-opacity-25 bg-white focus-border-green-500 border-gray-700 active:scale-105 duration-300 form-control w-full"
+              />
+            </div>
+            <div className="mt-4 w-full lg:w-1/3">
+              <label htmlFor="tahun" className="font-medium">
+                Tahun
+              </label>
+              <input
+                value={formInput.tahun}
+                onChange={handleChange}
+                type="number"
+                name="tahun"
+                id="tahun"
+                placeholder="Masukkan tahun..."
                 className="outline-none border px-2 py-3 text-gray-100 bg-opacity-25 bg-white focus-border-green-500 border-gray-700 active:scale-105 duration-300 form-control w-full"
               />
             </div>

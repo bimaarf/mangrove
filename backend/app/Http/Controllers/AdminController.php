@@ -104,8 +104,9 @@ class AdminController extends Controller
     {
         try {
             $__mangrove = Mangrove::find($id_mangrove);
-            $__mangrove->label  = $request->label;
-            $__mangrove->y      = $request->y;
+            $__mangrove->tempat = $request->label;
+            $__mangrove->jumlah_mangrove = $request->y;
+            $__mangrove->tahun     = $request->tahun;
             $__mangrove->update();
             return response()->json(['status' => 200]);
         } catch (\Throwable $th) {
@@ -116,8 +117,9 @@ class AdminController extends Controller
     {
         try {
             $__mangrove = new Mangrove();
-            $__mangrove->label = $request->label;
-            $__mangrove->y     = $request->y;
+            $__mangrove->tempat = $request->label;
+            $__mangrove->jumlah_mangrove = $request->y;
+            $__mangrove->tahun     = $request->tahun;
             $__mangrove->save();
             return response()->json(['status' => 200]);
         } catch (\Throwable $th) {

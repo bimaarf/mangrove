@@ -9,5 +9,5 @@ class Mangrove extends Model
 {
     use HasFactory;
     protected $table = 'tb_mangrove';
-    protected $fillable = ['label', 'y'];
+    protected $fillable = ['tempat', 'jumlah_mangrove', 'tahun'];
 }

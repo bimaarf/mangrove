@@ -15,6 +15,7 @@ export const PageMangrove = () => {
   const [formInput, setFormInput] = useState({
     label: "",
     y: "",
+    tahun: "",
   });
 
   const handleChange = (e) => {
@@ -35,7 +36,7 @@ export const PageMangrove = () => {
             toast.warning("Server error");
           } else {
             toast.success("Berhasil ditambahkan");
-            setFormInput({ label: "", y: "" });
+            setFormInput({ label: "", y: "", tahun: "" });
             __GET_MANGROVE_API();
           }
         })
@@ -90,10 +91,24 @@ export const PageMangrove = () => {
                   <input
                     onChange={handleChange}
                     value={formInput.y}
-                    type="text"
+                    type="number"
                     name="y"
                     id="y"
                     placeholder="Masukkan Jumlah..."
+                    className="outline-none border px-2 py-1 focus-border-green-500 active:scale-105 duration-300 form-control w-full"
+                  />
+                </div>
+                <div className="mt-4 w-full lg:w-1/3">
+                  <label htmlFor="tahun" className="font-medium">
+                    Tahun
+                  </label>
+                  <input
+                    value={formInput.tahun}
+                    onChange={handleChange}
+                    type="number"
+                    name="tahun"
+                    id="tahun"
+                    placeholder="Masukkan tahun..."
                     className="outline-none border px-2 py-1 focus-border-green-500 active:scale-105 duration-300 form-control w-full"
                   />
                 </div>
@@ -125,8 +140,9 @@ export const PageMangrove = () => {
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Label</th>
-                      <th>Y</th>
+                      <th>Tempat</th>
+                      <th>Jumlah Mangrove</th>
+                      <th>Tahun</th>
                       <th>xyz</th>
                     </tr>
                   </thead>
@@ -137,6 +153,7 @@ export const PageMangrove = () => {
                           <td>{key + 1}</td>
                           <td>{item.label}</td>
                           <td>{item.y}</td>
+                          <td>{item.tahun}</td>
                           <td>
                             <div className="flex justify-end items-center gap-1">
                               <UpdateMangrove

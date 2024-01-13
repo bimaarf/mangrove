@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('tb_mangrove', function (Blueprint $table) {
             $table->id();
-            $table->string('label');
-            $table->bigInteger('y');
+            $table->string('tempat');
+            $table->string('jumlah_mangrove');
+            $table->string('tahun')->nullable();
             $table->timestamps();
         });
     }

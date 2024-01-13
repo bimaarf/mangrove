@@ -32,10 +32,17 @@ class SiteController extends Controller
         $mangroveData = Mangrove::all();
 
         // Convert "y" values to integers
+        $data = array();
         foreach ($mangroveData as $item) {
-            $item->y = (int)$item->y;
+            array_push($data, [
+                'id' => $item->id,
+                'label' => $item->tempat,
+                'tahun' => $item->tahun,
+                'y' => (int)$item->jumlah_mangrove,
+
+            ]);
         }
 
-        return response()->json($mangroveData);
+        return response()->json($data);
     }
 }

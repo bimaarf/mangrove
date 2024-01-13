@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 import { toast } from "react-toastify";
-import ImageLogo from "../../Images/logo-122x140.png";
+import ImageLogo from "../../Images/logo.png";
 import { Donatur } from "./Modal/Donatur";
 import { JumlahMangrove } from "./Modal/JumlahMangrove";
 import { JumlahPengunjung } from "./Modal/JumlahPengunjung";
@@ -72,7 +72,7 @@ export const Headers = ({ setAuthCheck, authCheck }) => {
             htmlFor="jumlah-pengunjung"
             className="flex text-white cursor-pointer border py-1 px-2 whitespace-nowrap md:px-4 rounded hover:md:px-5 hover:text-gray-300 text-xs md:text-xl duration-200 justify-center items-center gap-1">
             <i className="fa-solid fa-person-hiking"></i>
-            <span>Jumlah Pengunjung</span>
+            <span>Pengunjung</span>
           </label>
           <div
             onClick={() => {
@@ -113,7 +113,7 @@ export const Headers = ({ setAuthCheck, authCheck }) => {
             <i className="fa fa-search"></i>
             <span>Tentang Kami</span>
           </div>
-          {authCheck && secureLocalStorage.getItem("auth_token") ? (
+          {authCheck && secureLocalStorage.getItem("auth_token") && (
             <div
               onClick={() => setDropdown(dropdown ? false : true)}
               className="flex text-white cursor-pointer border py-1 px-2 whitespace-nowrap md:px-4 rounded hover:md:px-5 hover:text-gray-300 text-xs md:text-xl duration-200 justify-center items-center gap-1">
@@ -123,16 +123,6 @@ export const Headers = ({ setAuthCheck, authCheck }) => {
                 {secureLocalStorage.getItem("auth_token") &&
                   secureLocalStorage.getItem("auth_name").split(" ")[0]}
               </span>
-            </div>
-          ) : (
-            <div
-              onClick={() => {
-                navRedirect("/login");
-                setDropdown(false);
-              }}
-              className="flex text-white cursor-pointer border py-1 px-2 whitespace-nowrap md:px-4 rounded hover:md:px-5 hover:text-gray-300 text-xs md:text-xl duration-200 justify-center items-center gap-1">
-              <i className="fa fa-user"></i>
-              <span>Masuk</span>
             </div>
           )}
           {dropdown && (

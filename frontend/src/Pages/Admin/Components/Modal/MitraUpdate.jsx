@@ -85,7 +85,7 @@ export const ModalMitraUpdate = ({ item, __GET_MITRA_API }) => {
               <input
                 value={formInput.tahun}
                 onChange={handleChange}
-                type="text"
+                type="number"
                 name="tahun"
                 id="tahun"
                 placeholder="Masukkan tahun..."
