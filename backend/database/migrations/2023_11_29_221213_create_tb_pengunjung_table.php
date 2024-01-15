@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama_pengunjung');
             $table->string('nama_kegiatan');
             $table->string('tahun');
+            $table->string('jumlah_orang');
             $table->timestamps();
         });
     }

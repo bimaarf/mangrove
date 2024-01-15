@@ -9,7 +9,7 @@ class Pengunjung extends Model
 {
     use HasFactory;
     protected $table = 'tb_pengunjung';
-    protected $fillable = ['nama_pengunjung', 'nama_kegiatan', 'tahun'];
+    protected $fillable = ['nama_pengunjung', 'nama_kegiatan', 'tahun', 'jumlah_orang'];
     public function getUpdatedAtAttribute()
     {
         return \Carbon\Carbon::parse($this->attributes['updated_at'])

@@ -15,6 +15,7 @@ export const Pengunjung = () => {
     nama_pengunjung: "",
     nama_kegiatan: "",
     tahun: "",
+    jumlah_orang: "",
   });
 
   const handleChange = (e) => {
@@ -37,6 +38,7 @@ export const Pengunjung = () => {
             nama_pengunjung: "",
             nama_kegiatan: "",
             tahun: "",
+            jumlah_orang: "",
           }); // Clear the form
           __GET_DATA_API();
         })
@@ -133,6 +135,22 @@ export const Pengunjung = () => {
                     onChange={handleChange}
                   />
                 </div>
+                <div className="mt-2 md:w-1/3">
+                  <label
+                    htmlFor="jumlah_orang"
+                    className="font-bold text-teal-600">
+                    Jumlah Orang
+                  </label>
+                  <input
+                    value={formInput.jumlah_orang}
+                    type="number"
+                    name="jumlah_orang"
+                    id="jumlah_orang"
+                    placeholder="Ketikkan sesuatu..."
+                    className="outline-none border px-2 py-2 focus:border-green-500 active:scale-105 duration-300 form-control w-full "
+                    onChange={handleChange}
+                  />
+                </div>
               </div>
               <div className="flex justify-end items-center gap-1">
                 <button
@@ -164,6 +182,7 @@ export const Pengunjung = () => {
                       <th>Nama Pengunjung</th>
                       <th>Nama Kegiatan</th>
                       <th>Tahun</th>
+                      <th>Jumlah Orang</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -175,6 +194,7 @@ export const Pengunjung = () => {
                           <td>{item.nama_pengunjung}</td>
                           <td>{item.nama_kegiatan}</td>
                           <td>{item.tahun}</td>
+                          <td>{item.jumlah_orang}</td>
                           <td>
                             <ModalPengunjungUpdate
                               item={item}

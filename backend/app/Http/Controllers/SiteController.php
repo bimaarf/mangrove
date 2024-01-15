@@ -28,31 +28,48 @@ class SiteController extends Controller
             return $__blog;
         }
     }
+    // public function pengunjungChart()
+    // {
+    //     $mangroveData = Pengunjung::all();
+    //     $chartData = [];
+    
+    //     foreach ($mangroveData as $item) {
+    //         $tahun = $item->tahun;
+    //         $index = array_search($tahun, array_column($chartData, 'label'));
+    
+    //         if ($index !== false) {
+    //             $chartData[$index]['y'] += (int) 1;
+    //         } else {
+    //             array_push($chartData, [
+    //                 'label' => $tahun,
+    //                 'y' => (int) 1,
+    //             ]);
+    //         }
+    //     }
+    
+    //     usort($chartData, function ($a, $b) {
+    //         return $a['label'] - $b['label'];
+    //     });
+    //     return response()->json($chartData);
+    // }
+    
     public function pengunjungChart()
     {
         $mangroveData = Pengunjung::all();
-        $chartData = [];
-    
+
+        // Convert "y" values to integers
+        $data = array();
         foreach ($mangroveData as $item) {
-            $tahun = $item->tahun;
-            $index = array_search($tahun, array_column($chartData, 'label'));
-    
-            if ($index !== false) {
-                $chartData[$index]['y'] += (int) 1;
-            } else {
-                array_push($chartData, [
-                    'label' => $tahun,
-                    'y' => (int) 1,
-                ]);
-            }
+            array_push($data, [
+                'id' => $item->id,
+                'label' => $item->nama_kegiatan,
+                'y' => (int)$item->jumlah_orang,
+
+            ]);
         }
-    
-        usort($chartData, function ($a, $b) {
-            return $a['label'] - $b['label'];
-        });
-        return response()->json($chartData);
+
+        return response()->json($data);
     }
-    
     public function mangroveGet()
     {
         $mangroveData = Mangrove::all();

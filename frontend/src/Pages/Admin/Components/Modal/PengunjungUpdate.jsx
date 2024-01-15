@@ -9,6 +9,7 @@ export const ModalPengunjungUpdate = ({ item, __GET_DATA_API }) => {
     nama_pengunjung: item.nama_pengunjung,
     nama_kegiatan: item.nama_kegiatan,
     tahun: item.tahun,
+    jumlah_orang: item.jumlah_orang,
   });
   const handleChange = (e) => {
     e.persist();
@@ -89,6 +90,20 @@ export const ModalPengunjungUpdate = ({ item, __GET_DATA_API }) => {
                 name="tahun"
                 id="tahun"
                 placeholder="Masukkan tahun..."
+                className="outline-none border px-2 py-3 text-gray-100 bg-opacity-25 bg-white focus-border-green-500 border-gray-700 active:scale-105 duration-300 form-control w-full"
+              />
+            </div>
+            <div className="mt-4 w-full lg:w-1/3">
+              <label htmlFor="jumlah_orang" className="font-medium">
+                Jumlah Orang
+              </label>
+              <input
+                value={formInput.jumlah_orang}
+                onChange={handleChange}
+                type="text"
+                name="jumlah_orang"
+                id="jumlah_orang"
+                placeholder="Masukkan Jumlah Orang..."
                 className="outline-none border px-2 py-3 text-gray-100 bg-opacity-25 bg-white focus-border-green-500 border-gray-700 active:scale-105 duration-300 form-control w-full"
               />
             </div>
