@@ -49,7 +49,7 @@ export const DataPengunjung = ({ getPengunjung }) => {
 
   const options = {
     title: {
-      text: "Jumlah Mangrove Ditanam",
+      text: "Jumlah Pengunjung",
     },
     data: [
       {
