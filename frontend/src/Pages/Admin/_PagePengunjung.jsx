@@ -7,6 +7,7 @@ import { ModalPengunjungUpdate } from "./Components/Modal/PengunjungUpdate";
 import { SidebarAdmin } from "./Components/_SidebarAdmin";
 import { JumlahPengunjung } from "../Components/Modal/JumlahPengunjung";
 import { LoadingScreen } from "../../LoadingScreen";
+import { DataPengunjung, PengunjungProvider } from "./Data/DataPengunjung";
 
 export const Pengunjung = () => {
   const [loadSubmit, setLoadSubmit] = useState(false);
@@ -150,6 +151,11 @@ export const Pengunjung = () => {
                   <span>Lihat</span>
                 </label>
               </div>
+              {getPengunjung && (
+                <PengunjungProvider>
+                  <DataPengunjung updateMangrove={handleSubmit} />
+                </PengunjungProvider>
+              )}
               <div className="overflow-x-auto">
                 <table className="table mt-4 border-t border-dashed w-full table-auto">
                   <thead>

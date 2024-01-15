@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Gallery;
 use App\Models\Mangrove;
+use App\Models\Pengunjung;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -27,6 +28,31 @@ class SiteController extends Controller
             return $__blog;
         }
     }
+    public function pengunjungChart()
+    {
+        $mangroveData = Pengunjung::all();
+        $chartData = [];
+    
+        foreach ($mangroveData as $item) {
+            $tahun = $item->tahun;
+            $index = array_search($tahun, array_column($chartData, 'label'));
+    
+            if ($index !== false) {
+                $chartData[$index]['y'] += (int) 1;
+            } else {
+                array_push($chartData, [
+                    'label' => $tahun,
+                    'y' => (int) 1,
+                ]);
+            }
+        }
+    
+        usort($chartData, function ($a, $b) {
+            return $a['label'] - $b['label'];
+        });
+        return response()->json($chartData);
+    }
+    
     public function mangroveGet()
     {
         $mangroveData = Mangrove::all();

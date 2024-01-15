@@ -2,14 +2,13 @@ import React, { useState, useContext, useEffect } from "react";
 import CanvasJSReact from "@canvasjs/react-charts";
 
 import axios from "axios";
-import { handler } from "daisyui";
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 // Create context
 const MangroveContext = React.createContext();
 
-export function MangroveProvider({ children }) {
+export function PengunjungProvider({ children }) {
   const [getMangrove, setMangrove] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,7 +21,7 @@ export function MangroveProvider({ children }) {
   useEffect(() => {
     // Fetch data Mangrove when the component is mounted
     axios
-      .get("api/mangrove/view")
+      .get("api/pengunjung/view/graf")
       .then((res) => {
         updateMangrove(res.data);
       })
@@ -30,7 +29,7 @@ export function MangroveProvider({ children }) {
         setError(err.message);
         setLoading(false);
       });
-  }, [handler]);
+  }, []); // Empty dependency array ensures this effect runs once
 
   return (
     <MangroveContext.Provider
@@ -44,8 +43,9 @@ export function useMangrove() {
   return useContext(MangroveContext);
 }
 
-export const DataMangrove = () => {
-  const { getMangrove, updateMangrove, loading, error } = useMangrove();
+export const DataPengunjung = ({ getPengunjung }) => {
+  const { getMangrove, updateMangrove, loading, error } =
+    useMangrove(getPengunjung);
 
   const options = {
     title: {
@@ -62,7 +62,7 @@ export const DataMangrove = () => {
   const reloadMangroveData = () => {
     // Reload Mangrove data
     axios
-      .get("api/mangrove/view")
+      .get("api/pengunjung/view/graf")
       .then((res) => {
         updateMangrove(res.data);
       })

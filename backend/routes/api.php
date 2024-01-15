@@ -27,6 +27,7 @@ Route::get('/struktur-organisasi/view', [StrukturOrgController::class, 'view']);
 Route::get('/mitra-donatur/view', [StrukturOrgController::class, 'view']);
 Route::get('/mitra-donatur/view', [AdminController::class, 'mitraGet']);
 Route::get('/pengunjung/view', [AdminController::class, 'pengunjungGet']);
+Route::get('/pengunjung/view/graf', [SiteController::class, 'pengunjungChart']);
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum']], function () {
     Route::post('/onload', [AuthController::class, 'onload']);
 
