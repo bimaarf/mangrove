@@ -19,7 +19,9 @@ export const JumlahPengunjung = ({ props }) => {
       <input type="checkbox" id="jumlah-pengunjung" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box w-11/12 pt-14 max-w-5xl bg-opacity-70 backdrop-filter backdrop-brightness-100 bg-gray-900 text-white">
-          <h1 className="text-center font-semibold border-b">Jumlah Pengunjung</h1>
+          <h1 className="text-center font-semibold border-b">
+            Jumlah Pengunjung
+          </h1>
           <table className="table">
             <thead>
               <tr className="text-white">
@@ -27,16 +29,18 @@ export const JumlahPengunjung = ({ props }) => {
                 <th>Nama Pengunjung</th>
                 <th>Nama Kegiatan</th>
                 <th>Tahun</th>
+                <th>Jumlah Orang</th>
               </tr>
             </thead>
             {getData ? (
               getData.map((item, key) => (
-                <tbody>
+                <tbody key={key}>
                   <tr>
                     <td>{key + 1}</td>
                     <td>{item.nama_pengunjung}</td>
                     <td>{item.nama_kegiatan}</td>
                     <td>{item.tahun}</td>
+                    <td>{item.jumlah_orang}</td>
                   </tr>
                 </tbody>
               ))
